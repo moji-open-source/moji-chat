@@ -11,11 +11,11 @@
   "app": {
     "windows": [
       {
-        "width": 600,
+        "width": 450,
+        "height": 600,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay",
-        "height": 400,
-        "visible": false
+        "url": "/login"
       }
     ],
     "security": {
