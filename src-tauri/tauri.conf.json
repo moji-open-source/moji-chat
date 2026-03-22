@@ -12,10 +12,11 @@
     "windows": [
       {
         "width": 450,
-        "height": 600,
+        "height": 670,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay",
-        "url": "/login"
+        "url": "/login",
+        "resizable": false
       }
     ],
     "security": {

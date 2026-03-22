@@ -1,18 +1,12 @@
-'use client'
+import type { Metadata } from 'next'
 
-import { LoginForm, LoginHero, LoginShell } from '@/components/login'
+import { LoginScene } from '@/components/login'
+
+export const metadata: Metadata = {
+  title: 'Login | Moji Chat',
+  description: 'Sign in to Moji Chat and continue your desktop conversation workspace.',
+}
 
 export default function LoginPage() {
-  return (
-    <LoginShell>
-      <div className="pb-8">
-        <LoginHero />
-      </div>
-      <LoginForm
-        onSubmit={values => {
-          console.log('Login submit:', values)
-        }}
-      />
-    </LoginShell>
-  )
+  return <LoginScene />
 }

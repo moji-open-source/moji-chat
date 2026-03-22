@@ -1,36 +1,34 @@
 'use client'
 
-import { SubmitEvent, useState } from 'react'
+import { SubmitEvent } from 'react'
 
 import { Button, Checkbox, Input, Label } from '@/components/ui'
-
-interface LoginFormValues {
-  account: string
-  password: string
-  remember: boolean
-  agree: boolean
-}
+import type { LoginFormValues } from './login.types'
 
 interface LoginFormProps {
+  values: LoginFormValues
+  isSubmitting?: boolean
+  statusMessage?: string
+  onAccountChange: (value: string) => void
+  onPasswordChange: (value: string) => void
+  onRememberChange: (value: boolean) => void
+  onAgreeChange: (value: boolean) => void
   onSubmit?: (values: LoginFormValues) => Promise<void> | void
 }
 
-export function LoginForm({ onSubmit }: LoginFormProps) {
-  const [account, setAccount] = useState('')
-  const [password, setPassword] = useState('')
-  const [remember, setRemember] = useState(true)
-  const [agree, setAgree] = useState(true)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
+export function LoginForm({
+  values,
+  isSubmitting = false,
+  statusMessage,
+  onAccountChange,
+  onPasswordChange,
+  onRememberChange,
+  onAgreeChange,
+  onSubmit,
+}: LoginFormProps) {
   async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
-
-    try {
-      setIsSubmitting(true)
-      await onSubmit?.({ account, password, remember, agree })
-    } finally {
-      setIsSubmitting(false)
-    }
+    await onSubmit?.(values)
   }
 
   return (
@@ -41,10 +39,10 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
         autoComplete="username"
         autoFocus
         required
-        value={account}
-        onChange={e => setAccount(e.target.value)}
-        placeholder="Account"
-        className="h-11 rounded-xl bg-muted"
+        value={values.account}
+        onChange={e => onAccountChange(e.target.value)}
+        placeholder="name@company.com"
+        className="h-11 rounded-xl border-white/10 bg-white/5"
       />
 
       <Input
@@ -52,37 +50,49 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
         type="password"
         autoComplete="current-password"
         required
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        placeholder="Password"
-        className="h-11 rounded-xl bg-muted"
+        value={values.password}
+        onChange={e => onPasswordChange(e.target.value)}
+        placeholder="Enter your password"
+        className="h-11 rounded-xl border-white/10 bg-white/5"
       />
 
-      <div className="flex items-center gap-2" data-tauri-drag-region>
-        <Checkbox
-          id="remember-password"
-          checked={remember}
-          onCheckedChange={checked => setRemember(checked === true)}
-        />
-        <Label htmlFor="remember-password" className="text-xs font-normal text-muted-foreground">
-          Remember password
-        </Label>
+      <div className="flex items-center justify-between gap-3" data-tauri-drag-region>
+        <div className="flex items-center gap-2">
+          <Checkbox
+            id="remember-password"
+            checked={values.remember}
+            onCheckedChange={checked => onRememberChange(checked === true)}
+          />
+          <Label htmlFor="remember-password" className="text-xs font-normal text-muted-foreground">
+            Remember password
+          </Label>
+        </div>
+
+        <a href="#" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
+          Forgot password?
+        </a>
       </div>
 
       <Button
         type="submit"
         variant="default"
         className="h-11 w-full rounded-xl text-sm font-medium"
-        disabled={isSubmitting || !agree}
+        disabled={isSubmitting || !values.agree}
       >
         {isSubmitting ? 'Signing in...' : 'Sign in'}
       </Button>
 
+      {statusMessage ? (
+        <p className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs leading-5 text-muted-foreground">
+          {statusMessage}
+        </p>
+      ) : null}
+
       <div className="flex items-start gap-2" data-tauri-drag-region>
         <Checkbox
           id="agree-protocol"
-          checked={agree}
-          onCheckedChange={checked => setAgree(checked === true)}
+          checked={values.agree}
+          onCheckedChange={checked => onAgreeChange(checked === true)}
         />
         <Label
           htmlFor="agree-protocol"
@@ -98,8 +108,6 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
           </a>
         </Label>
       </div>
-
-      <div className="h-9"></div>
     </form>
   )
 }
