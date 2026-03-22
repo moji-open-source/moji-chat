@@ -16,3 +16,4 @@ sqlx
 staticlib
 tauri
 tlsv
+shadcn
