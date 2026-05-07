@@ -1,44 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-
+import { useLogin } from '@/hooks/use-login'
+import { FooterCopyright } from '../footer-copyright'
 import { LoginForm } from './login-form'
 import { LoginHero } from './login-hero'
 import { LoginSecondaryActions } from './login-secondary-actions'
 import { LoginShell } from './login-shell'
-import type { LoginFormValues } from './login.types'
-import { FooterCopyright } from '../footer-copyright'
-
-const initialValues: LoginFormValues = {
-  account: '',
-  password: '',
-  remember: true,
-  agree: true,
-}
 
 export function LoginScene() {
-  const [values, setValues] = useState(initialValues)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  // Use your account to sync conversations and workspace preferences.
-  const [message, setMessage] = useState('')
-
-  function updateField<K extends keyof LoginFormValues>(field: K, value: LoginFormValues[K]) {
-    setValues(current => ({ ...current, [field]: value }))
-  }
-
-  async function handleSubmit(nextValues: LoginFormValues) {
-    setMessage('')
-    setIsSubmitting(true)
-
-    try {
-      console.log('Login submit:', nextValues)
-      setMessage('Sign-in request submitted. You can connect the real authentication flow here next.')
-    } catch {
-      setMessage('Sign-in failed. Check your network connection and try again.')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+  const { values, isSubmitting, message, updateField, handleSubmit } = useLogin()
 
   return (
     <LoginShell>

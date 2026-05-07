@@ -13,7 +13,7 @@ interface LoginFormProps {
   onPasswordChange: (value: string) => void
   onRememberChange: (value: boolean) => void
   onAgreeChange: (value: boolean) => void
-  onSubmit?: (values: LoginFormValues) => Promise<void> | void
+  onSubmit?: () => Promise<void> | void
 }
 
 export function LoginForm({
@@ -28,7 +28,7 @@ export function LoginForm({
 }: LoginFormProps) {
   async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
-    await onSubmit?.(values)
+    await onSubmit?.()
   }
 
   return (

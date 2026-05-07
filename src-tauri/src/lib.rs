@@ -16,8 +16,11 @@ use sqlx::migrate::MigrateDatabase;
 use tauri::Manager;
 use utils::window::WebviewWindowExt;
 
+mod commands;
 mod manager;
 mod utils;
+
+use commands::login;
 
 static DB_URL: Mutex<String> = Mutex::new(String::new());
 
@@ -200,7 +203,8 @@ pub async fn run() {
         .invoke_handler(tauri::generate_handler![
             get_tasks,
             add_task,
-            set_task_by_id
+            set_task_by_id,
+            login
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
