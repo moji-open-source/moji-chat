@@ -52,7 +52,7 @@ export function LoginForm({
         required
         value={values.password}
         onChange={e => onPasswordChange(e.target.value)}
-        placeholder="Enter your password"
+        placeholder="••••••••"
         className="h-11 rounded-xl border-white/10 bg-white/5"
       />
 
@@ -64,12 +64,12 @@ export function LoginForm({
             onCheckedChange={checked => onRememberChange(checked === true)}
           />
           <Label htmlFor="remember-password" className="text-xs font-normal text-muted-foreground">
-            Remember password
+            Remember Me
           </Label>
         </div>
 
-        <a href="#" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
-          Forgot password?
+        <a href="#" className="text-[10px] font-semibold text-muted-foreground transition-colors hover:text-foreground hover:underline">
+          Forgot?
         </a>
       </div>
 

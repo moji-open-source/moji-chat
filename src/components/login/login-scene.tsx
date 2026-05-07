@@ -7,6 +7,7 @@ import { LoginHero } from './login-hero'
 import { LoginSecondaryActions } from './login-secondary-actions'
 import { LoginShell } from './login-shell'
 import type { LoginFormValues } from './login.types'
+import { FooterCopyright } from '../footer-copyright'
 
 const initialValues: LoginFormValues = {
   account: '',
@@ -18,7 +19,8 @@ const initialValues: LoginFormValues = {
 export function LoginScene() {
   const [values, setValues] = useState(initialValues)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [message, setMessage] = useState('Use your account to sync conversations and workspace preferences.')
+  // Use your account to sync conversations and workspace preferences.
+  const [message, setMessage] = useState('')
 
   function updateField<K extends keyof LoginFormValues>(field: K, value: LoginFormValues[K]) {
     setValues(current => ({ ...current, [field]: value }))
@@ -52,6 +54,14 @@ export function LoginScene() {
         onSubmit={handleSubmit}
       />
       <LoginSecondaryActions />
+
+      <footer className="flex flex-col items-center gap-4 w-full py-8 bg-transparent">
+        <div className="text-[11px] font-medium tracking-wide text-slate-400" data-tauri-drag-region>
+          Don't have an account? <a className="text-primary font-bold hover:underline" href="#">Sign Up</a>
+        </div>
+
+        <FooterCopyright className="text-center dark:opacity-45" />
+      </footer>
     </LoginShell>
   )
 }

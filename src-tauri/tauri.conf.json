@@ -11,12 +11,22 @@
   "app": {
     "windows": [
       {
+        "label": "main",
         "width": 450,
         "height": 670,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay",
         "url": "/login",
-        "resizable": false
+        "resizable": false,
+        "visible": true
+      },
+      {
+        "label": "main1",
+        "width": 850,
+        "height": 750,
+        "hiddenTitle": true,
+        "titleBarStyle": "Overlay",
+        "url": "/messages"
       }
     ],
     "security": {

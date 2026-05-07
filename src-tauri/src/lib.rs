@@ -1,11 +1,18 @@
 #![allow(unexpected_cfgs)]
 
-use anyhow::{Context, Result};
+use anyhow::Context;
+use anyhow::Result;
 use manager::app_handle::AppHandleManager;
-use std::{error, fs, ops::Add, sync::Mutex};
+use std::error;
+use std::fs;
+use std::ops::Add;
+use std::sync::Mutex;
 
-use serde::{Deserialize, Serialize};
-use sqlx::{Pool, Sqlite, migrate::MigrateDatabase};
+use serde::Deserialize;
+use serde::Serialize;
+use sqlx::Pool;
+use sqlx::Sqlite;
+use sqlx::migrate::MigrateDatabase;
 use tauri::Manager;
 use utils::window::WebviewWindowExt;
 
@@ -179,6 +186,11 @@ pub async fn run() {
 
             #[cfg(target_os = "macos")]
             if let Some(window) = app.get_webview_window("main") {
+                window.to_native_window();
+            }
+
+            #[cfg(target_os = "macos")]
+            if let Some(window) = app.get_webview_window("main1") {
                 window.to_native_window();
             }
 

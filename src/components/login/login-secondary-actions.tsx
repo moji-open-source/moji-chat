@@ -5,7 +5,7 @@ export function LoginSecondaryActions() {
     <div className="space-y-4" data-tauri-drag-region>
       <div className="flex w-full items-center gap-3" data-tauri-drag-region>
         <div className="h-px flex-1 bg-white/10" data-tauri-drag-region />
-        <span className="text-[11px] tracking-[0.18em] text-muted-foreground uppercase" data-tauri-drag-region>
+        <span className="text-[11px] tracking-[0.18em] text-muted-foreground uppercase text-outline/60 font-bold" data-tauri-drag-region>
           or continue with
         </span>
         <div className="h-px flex-1 bg-white/10" />
@@ -20,12 +20,6 @@ export function LoginSecondaryActions() {
         </Button>
       </div>
 
-      <p className="text-center text-xs text-muted-foreground" data-tauri-drag-region>
-        New here?
-        <a href="#" className="ml-1 text-foreground transition-colors hover:text-primary">
-          Create an account
-        </a>
-      </p>
     </div>
   )
 }
