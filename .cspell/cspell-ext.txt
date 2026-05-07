@@ -8,12 +8,13 @@ healthcheck
 iconify
 moji
 nextjs
+nums
 objc
 rlib
 serde
+shadcn
 skiped
 sqlx
 staticlib
 tauri
 tlsv
-shadcn
