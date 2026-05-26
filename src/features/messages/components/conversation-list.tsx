@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Pin, Plus, Search } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -106,10 +106,16 @@ function ConversationHeader() {
 }
 
 export function ConversationList() {
+  const router = useRouter()
+
+  function handleConversationSelect(conversationId: string) {
+    router.push(`/messages/${conversationId}`)
+  }
+
   return (
     <>
       <ConversationHeader />
-      <Listbox>
+      <Listbox onValueChange={handleConversationSelect}>
         <ListboxContent className="border-none! border-0! bg-transparent! flex-1 overflow-y-auto px-1.75 pb-4 pt-0 space-y-4 scrollbar-hide">
           <ConversationGroup title="Pinned" pinned />
           <ConversationGroup title="Recent" />
