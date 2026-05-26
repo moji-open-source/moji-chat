@@ -2,6 +2,7 @@
 
 use std::fs;
 
+use commands::{login, open_app_setting_window};
 use manager::app_handle::AppHandleManager;
 use tauri::Manager;
 use utils::window::WebviewWindowExt;
@@ -9,8 +10,6 @@ use utils::window::WebviewWindowExt;
 mod commands;
 mod manager;
 mod utils;
-
-use commands::login;
 
 #[tokio::main]
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -40,7 +39,7 @@ pub async fn run() {
             Ok(())
         })
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![login])
+        .invoke_handler(tauri::generate_handler![login, open_app_setting_window])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

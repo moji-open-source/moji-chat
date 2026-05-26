@@ -1,0 +1,66 @@
+'use client'
+
+import { useCallback, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Settings } from 'lucide-react'
+
+import { Button } from '@/components/ui/button'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { SETTINGS_ROUTE } from '@/features/settings/constants'
+import { cn } from '@/lib/utils'
+import { canOpenDesktopWindow, openAppSettingWindow } from '@/services/window'
+
+interface OpenSettingsButtonProps {
+  className?: string
+}
+
+export function OpenSettingsButton({ className }: OpenSettingsButtonProps) {
+  const router = useRouter()
+  const [isOpening, setIsOpening] = useState(false)
+
+  const handleOpenSettings = useCallback(async () => {
+    if (isOpening)
+      return
+
+    if (!canOpenDesktopWindow()) {
+      router.push(SETTINGS_ROUTE)
+      return
+    }
+
+    setIsOpening(true)
+
+    try {
+      await openAppSettingWindow()
+    } catch (error) {
+      console.error('Failed to open settings window:', error)
+    } finally {
+      setIsOpening(false)
+    }
+  }, [isOpening, router])
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          aria-label="Settings"
+          disabled={isOpening}
+          onClick={handleOpenSettings}
+          className={cn(
+            'size-10 rounded-lg text-sidebar-accent-foreground hover:border hover:border-solid hover:border-primary/25 hover:bg-sidebar-primary/20 hover:text-primary',
+            className,
+          )}
+        >
+          <Settings />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="right">Settings</TooltipContent>
+    </Tooltip>
+  )
+}
