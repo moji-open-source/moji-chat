@@ -8,10 +8,9 @@ export function ContactEmpty() {
           <ContactRound />
         </div>
         <div className="flex flex-col gap-1">
-          <h2 className="text-base font-semibold">选择一个联系人</h2>
+          <h2 className="text-base font-semibold">Select a contact</h2>
           <p className="text-sm leading-6 text-muted-foreground">
-            联系人列表由 `/contacts` 的 layout 固定，右侧详情由
-            `/contacts/[contactId]` 控制。
+            Choose someone from the list to view their profile.
           </p>
         </div>
       </div>

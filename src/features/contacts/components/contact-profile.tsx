@@ -32,16 +32,16 @@ export function ContactProfile({ contactId }: { contactId: string }) {
         </div>
 
         <div className="flex shrink-0 items-center gap-1">
-          <Button variant="ghost" size="icon" className="size-8" aria-label="发消息">
+          <Button variant="ghost" size="icon" className="size-8" aria-label="Message">
             <MessageSquareText />
           </Button>
-          <Button variant="ghost" size="icon" className="size-8" aria-label="语音通话">
+          <Button variant="ghost" size="icon" className="size-8" aria-label="Voice call">
             <Phone />
           </Button>
-          <Button variant="ghost" size="icon" className="size-8" aria-label="视频通话">
+          <Button variant="ghost" size="icon" className="size-8" aria-label="Video call">
             <Video />
           </Button>
-          <Button variant="ghost" size="icon" className="size-8" aria-label="更多操作">
+          <Button variant="ghost" size="icon" className="size-8" aria-label="More actions">
             <MoreHorizontal />
           </Button>
         </div>
@@ -65,26 +65,26 @@ export function ContactProfile({ contactId }: { contactId: string }) {
           <div className="grid gap-3 sm:grid-cols-3">
             <Button>
               <MessageSquareText data-icon="inline-start" />
-              发消息
+              Message
             </Button>
             <Button variant="secondary">
               <Phone data-icon="inline-start" />
-              通话
+              Call
             </Button>
             <Button variant="outline">
               <UserPlus data-icon="inline-start" />
-              备注
+              Note
             </Button>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-lg border bg-card p-4">
-              <p className="text-xs font-medium text-muted-foreground">账号</p>
+              <p className="text-xs font-medium text-muted-foreground">Handle</p>
               <p className="mt-2 text-sm">{contact.handle}</p>
             </div>
             <div className="rounded-lg border bg-card p-4">
-              <p className="text-xs font-medium text-muted-foreground">状态</p>
-              <p className="mt-2 text-sm">{contact.online ? '在线' : '离线'}</p>
+              <p className="text-xs font-medium text-muted-foreground">Status</p>
+              <p className="mt-2 text-sm">{contact.online ? 'Online' : 'Offline'}</p>
             </div>
           </div>
         </section>

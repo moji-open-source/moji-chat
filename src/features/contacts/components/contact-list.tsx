@@ -23,12 +23,12 @@ export function ContactList() {
       <header className="flex shrink-0 flex-col gap-4 border-b px-4 py-4">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="truncate text-base font-semibold">联系人</h1>
+            <h1 className="truncate text-base font-semibold">Contacts</h1>
             <p className="mt-1 truncate text-xs text-muted-foreground">
-              好友、系统助手和团队成员
+              Friends, bots, and team members
             </p>
           </div>
-          <Button size="icon" className="size-8 shrink-0 rounded-lg" aria-label="添加联系人">
+          <Button size="icon" className="size-8 shrink-0 rounded-lg" aria-label="Add contact">
             <Plus />
           </Button>
         </div>
@@ -36,7 +36,7 @@ export function ContactList() {
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="搜索联系人"
+            placeholder="Search contacts"
             className="h-9 rounded-lg pl-9"
           />
         </div>
