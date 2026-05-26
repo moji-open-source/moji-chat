@@ -17,7 +17,7 @@ export function ThreePaneLayout({
     <div className="flex h-full min-h-0 min-w-0 flex-1 overflow-hidden">
       <aside
         className={cn(
-          'flex w-80 shrink-0 flex-col border-r bg-card/70',
+          'w-72 bg-[#13131d] border-r border-border flex flex-col shrink-0',
           listClassName,
         )}
       >

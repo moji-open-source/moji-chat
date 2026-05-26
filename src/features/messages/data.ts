@@ -1,11 +1,13 @@
 export interface Conversation {
-  id: string
-  name: string
-  preview: string
-  time: string
-  unread?: number
-  pinned?: boolean
-  online?: boolean
+  id: string;
+  name: string;
+  avatar: string;
+  lastMessage: string;
+  time: string;
+  unread: number;
+  pinned: boolean;
+  online: boolean;
+  typing?: boolean;
 }
 
 export interface Message {
@@ -17,34 +19,76 @@ export interface Message {
 
 export const conversations: Conversation[] = [
   {
-    id: 'design-sync',
-    name: '产品设计同步',
-    preview: '主页结构可以先稳定下来，后续再接数据。',
-    time: '00:42',
-    unread: 2,
+    id: 'c1',
+    name: 'Aria Chen',
+    avatar: 'AC',
+    lastMessage: 'Sent you the Figma file! Let me know what you think 🎨',
+    time: 'now',
+    unread: 3,
+    pinned: true,
+    online: true,
+    typing: false,
+  },
+  {
+    id: 'c2',
+    name: 'Design Team',
+    avatar: 'DT',
+    lastMessage: 'Kai: Sprint review is at 4pm today',
+    time: '2m',
+    unread: 7,
     pinned: true,
     online: true,
   },
   {
-    id: 'tauri-core',
-    name: 'Tauri Core',
-    preview: '窗口命令已经预留，下一步可以接登录态。',
-    time: '昨天',
-    pinned: true,
+    id: 'c3',
+    name: 'Kai Nakamura',
+    avatar: 'KN',
+    lastMessage: 'yeah that PR looks good to merge',
+    time: '18m',
+    unread: 0,
+    pinned: false,
+    online: true,
+    typing: true,
   },
   {
-    id: 'frontend-room',
-    name: '前端小组',
-    preview: '联系人页也走同一套三栏结构。',
-    time: '周一',
-    unread: 5,
+    id: 'c4',
+    name: 'Zoe Laurent',
+    avatar: 'ZL',
+    lastMessage: 'Revised the logo — check your email',
+    time: '1h',
+    unread: 1,
+    pinned: false,
+    online: false,
+  },
+  {
+    id: 'c5',
+    name: 'Marcus Webb',
+    avatar: 'MW',
+    lastMessage: 'Deployment is live ✅',
+    time: '3h',
+    unread: 0,
+    pinned: false,
     online: true,
   },
   {
-    id: 'notes',
-    name: '灵感草稿',
-    preview: '这里可以放自己发给自己的消息和 Prompt 片段。',
-    time: '5月24日',
+    id: 'c6',
+    name: 'Sasha Petrov',
+    avatar: 'SP',
+    lastMessage: 'Can we hop on a call tomorrow?',
+    time: 'Yesterday',
+    unread: 0,
+    pinned: false,
+    online: false,
+  },
+  {
+    id: 'c7',
+    name: 'Lena Hoffman',
+    avatar: 'LH',
+    lastMessage: 'Here are the model benchmarks you asked about',
+    time: '2d',
+    unread: 0,
+    pinned: false,
+    online: true,
   },
 ]
 
