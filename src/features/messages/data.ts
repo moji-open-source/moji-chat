@@ -12,8 +12,8 @@ export interface Conversation {
 
 export interface Message {
   id: string
-  author: 'me' | 'them'
-  body: string
+  sender: 'me' | 'other'
+  text: string
   time: string
 }
 
@@ -92,50 +92,16 @@ export const conversations: Conversation[] = [
   },
 ]
 
+
 export const messagesByConversation: Record<string, Message[]> = {
-  'design-sync': [
-    {
-      id: 'm1',
-      author: 'them',
-      body: '我把主导航、列表栏和详情区拆开了，路由会更清楚。',
-      time: '00:34',
-    },
-    {
-      id: 'm2',
-      author: 'me',
-      body: '很好，消息页和联系人页都可以用自己的 layout 承载列表。',
-      time: '00:38',
-    },
-    {
-      id: 'm3',
-      author: 'them',
-      body: '设置页这种只有两个区域的内容，就直接放在 AppShell 右侧。',
-      time: '00:42',
-    },
-  ],
-  'tauri-core': [
-    {
-      id: 'm1',
-      author: 'them',
-      body: 'Tauri 窗口拖拽区域保留在最外层，内容区只管业务。',
-      time: '昨天',
-    },
-  ],
-  'frontend-room': [
-    {
-      id: 'm1',
-      author: 'me',
-      body: '下一步可以把会话列表里的搜索、置顶、未读做成客户端组件。',
-      time: '周一',
-    },
-  ],
-  notes: [
-    {
-      id: 'm1',
-      author: 'me',
-      body: '把当前选中的会话放进 URL，而不是只放进全局 store。',
-      time: '5月24日',
-    },
+  c1: [
+    { id: 'c1', sender: 'other', text: 'Hey! Did you get a chance to look at the new designs?', time: '2:08 PM' },
+    { id: 'c1', sender: 'me', text: 'Just opened them now — the color palette is stunning', time: '2:09 PM' },
+    { id: 'c1', sender: 'other', text: 'Thanks! I went with a darker base this time. Felt more premium.', time: '2:10 PM' },
+    { id: 'c1', sender: 'me', text: 'It really shows. The purple accent works perfectly against it.', time: '2:11 PM' },
+    { id: 'c1', sender: 'other', text: 'Exactly what I was going for 🎨 Also tweaked the typography — switched to Inter.', time: '2:12 PM' },
+    { id: 'c1', sender: 'me', text: 'Smart call. Readable and modern without being generic.', time: '2:13 PM' },
+    { id: 'c1', sender: 'other', text: 'Sent you the Figma file! Let me know what you think 🎨', time: '2:14 PM' },
   ],
 }
 

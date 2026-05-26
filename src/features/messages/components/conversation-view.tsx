@@ -12,7 +12,7 @@ import {
 } from '@/features/messages/data'
 
 function MessageBubble({ message }: { message: Message }) {
-  const mine = message.author === 'me'
+  const mine = message.sender === 'me'
 
   return (
     <div className={cn('flex', mine ? 'justify-end' : 'justify-start')}>
@@ -24,7 +24,7 @@ function MessageBubble({ message }: { message: Message }) {
             : 'rounded-bl-md bg-muted text-foreground',
         )}
       >
-        <p>{message.body}</p>
+        <p>{message.text}</p>
         <p
           className={cn(
             'mt-1 text-right text-[11px]',
