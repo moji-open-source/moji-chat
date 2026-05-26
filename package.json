@@ -64,7 +64,7 @@
     "next-themes": "^0.4.6",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-listbox-primitives": "^1.1.5",
+    "react-listbox-primitives": "^1.1.6",
     "react-resizable-panels": "4.11.0",
     "react-split-pane": "^3.2.0",
     "tailwind-merge": "^3.5.0",
