@@ -1,104 +1,69 @@
-import type { LucideIcon } from 'lucide-react'
-import { Bell, Database, Monitor, Shield } from 'lucide-react'
+import { ChevronRight, Moon, Sun } from 'lucide-react'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-
-const sections = [
-  {
-    title: '账户与安全',
-    description: '登录状态、设备信任和本地密钥管理。',
-    icon: Shield,
-    status: '本地安全策略',
-  },
-  {
-    title: '通知',
-    description: '桌面提醒、声音和免打扰时间。',
-    icon: Bell,
-    status: '桌面通知',
-  },
-  {
-    title: '外观',
-    description: '主题、窗口密度和侧边栏显示方式。',
-    icon: Monitor,
-    status: '界面偏好',
-  },
-  {
-    title: '数据',
-    description: '消息缓存、附件目录和同步策略。',
-    icon: Database,
-    status: '存储管理',
-  },
-] as const
+import { Switch } from '@/components/ui/switch'
 
 export function SettingsView() {
   return (
-    <div className="flex h-full min-h-0 flex-1 flex-col bg-background">
-      <header
-        data-tauri-drag-region
-        className="flex h-16 shrink-0 items-center border-b px-6"
-      >
-        <div className="min-w-0">
-          <h1 className="truncate text-base font-semibold">设置</h1>
-          <p className="mt-1 truncate text-xs text-muted-foreground">
-            管理 Moji Chat 的账号、通知、显示和本地数据。
-          </p>
-        </div>
-      </header>
+    <main className="flex-1 flex flex-col min-w-0 bg-background overflow-auto">
+      <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6 flex h-full min-h-0 flex-col">
+        <Section title="Appearance">
+          <Row label="Theme" sub="Choose between dark and light mode" right={<ThemeSegment />} border={false} />
+        </Section>
 
-      <main className="min-h-0 flex-1 overflow-y-auto px-6 py-6">
-        <section className="mx-auto flex w-full max-w-3xl flex-col gap-5">
-          <div className="flex flex-col gap-1">
-            <h2 className="text-xl font-semibold">应用偏好</h2>
-            <p className="text-sm leading-6 text-muted-foreground">
-              常用设置会优先服务桌面端体验，后续可以按模块接入持久化和账号同步。
-            </p>
-          </div>
+        <Section title="Notifications">
+          <Row label="Enable Notifications" sub="Show alerts for new messages" right={<Switch />} />
+          <Row label="Message Sounds" sub="Play sounds for incoming messages" right={<Switch />} />
+          <Row label="Message Preview" sub="Show content in notifications" right={<Switch />} border={false} />
+        </Section>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {sections.map((section) => (
-              <SettingsSectionCard key={section.title} section={section} />
-            ))}
-          </div>
-        </section>
-      </main>
+        <Section title="About">
+          <Row label="Clover" sub="Version 0.1.0 (Build 42)" right={
+            <span className="text-[11px] px-2.5 py-1 rounded-full bg-black/7 dark:bg-white/7 text-[rgba(16,8,36,0.34)] dark:text-white/30">Latest</span>
+          } />
+          <Row label="Acknowledgements" right={
+            <ChevronRight className="w-4 h-4 dark:text-white/18 text-[rgba(16,8,36,0.34)]" />
+          } border={false} />
+        </Section>
+      </div>
+    </main>
+  )
+}
+
+// Segmented control for theme
+const ThemeSegment = () => (
+  <div className="flex p-0.5 rounded-lg gap-0.5 bg-black/6 dark:bg-white/7">
+    <button
+      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium capitalize transition-all bg-[rgba(124,58,237,0.28)] dark:bg-[rgba(124,58,237,0.15)] border border-primary/25 text-[rgba(167,139,250,0.9)]"
+    >
+      <Moon className="w-3 h-3" />
+      Dark
+    </button>
+    <button
+      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium capitalize transition-all text-white/30"
+    >
+      <Sun className="w-3 h-3" />
+      Light
+    </button>
+  </div>
+)
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <p className="text-[11px] font-semibold uppercase tracking-widest mb-2 px-1 text-muted-foreground/50">{title}</p>
+      <div className="rounded-[14px] overflow-hidden bg-black/4 dark:bg-white/6 border border-black/7 dark:border-white/7">{children}</div>
     </div>
   )
 }
 
-interface SettingsSection {
-  title: string
-  description: string
-  icon: LucideIcon
-  status: string
-}
-
-function SettingsSectionCard({ section }: { section: SettingsSection }) {
-  const Icon = section.icon
-
+function Row({ label, sub, right, border = true }: { label: string; sub?: string; right: React.ReactNode, border?: boolean }) {
   return (
-    <Card className="rounded-lg shadow-none transition-colors hover:bg-accent/40">
-      <CardHeader className="p-4 pb-2">
-        <div className="flex items-start gap-3">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
-            <Icon aria-hidden="true" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <CardTitle className="truncate text-sm">{section.title}</CardTitle>
-            <CardDescription className="mt-1 leading-6">
-              {section.description}
-            </CardDescription>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0">
-        <p className="text-xs text-muted-foreground">{section.status}</p>
-      </CardContent>
-    </Card>
+    <div className={`flex items-center gap-3 px-4 py-3 ${border ? 'border-b border-b-border' : ''}`}>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium">{label}</p>
+        {sub && <p className="text-xs mt-0.5 text-muted-foreground">{sub}</p>}
+      </div>
+      {right}
+    </div>
   )
 }
