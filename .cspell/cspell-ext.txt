@@ -6,8 +6,11 @@ codegen
 ctong
 healthcheck
 iconify
+maximizable
+minimizable
 moji
 nextjs
+nswindow
 nums
 objc
 rlib
