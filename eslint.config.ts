@@ -29,7 +29,7 @@ export default [
   },
 
   {
-    ignores: ['.next/', 'src-tauri/', 'out', '.agents/'],
+    ignores: ['.next/', 'next-env.d.ts', 'src-tauri/', 'out', '.agents/'],
   },
 
   {
