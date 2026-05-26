@@ -15,24 +15,38 @@ function MessageBubble({ message }: { message: Message }) {
   const mine = message.sender === 'me'
 
   return (
-    <div className={cn('flex', mine ? 'justify-end' : 'justify-start')}>
-      <div
-        className={cn(
-          'max-w-[72%] rounded-2xl px-4 py-2.5 text-sm leading-6',
-          mine
-            ? 'rounded-br-md bg-primary text-primary-foreground'
-            : 'rounded-bl-md bg-muted text-foreground',
-        )}
-      >
-        <p>{message.text}</p>
-        <p
-          className={cn(
-            'mt-1 text-right text-[11px]',
-            mine ? 'text-primary-foreground/70' : 'text-muted-foreground',
-          )}
-        >
-          {message.time}
-        </p>
+    <div
+      className={cn(
+        'px-3.5 py-2 text-sm leading-relaxed rounded-xl backdrop-blur-2xl border shadow-[inset_0px_1px_0px_rgba(255,255,255,0.06)]',
+        mine
+          ? 'rounded-br-sm bg-[linear-gradient(135deg,rgba(124,58,237,0.88),rgba(109,40,217,0.88))] text-primary-foreground'
+          : 'rounded-tl-sm bg-muted text-foreground',
+      )}
+    >
+      <p>{message.text}</p>
+    </div>
+  )
+}
+
+function MessageRow({ message }: { message: Message }) {
+  const mine = message.sender === 'me'
+  return (
+    <div className={cn('flex gap-2.5 mt-4', mine && 'flex-row-reverse')}>
+      {mine ? undefined : (
+        <div className="shrink-0">
+          <div
+            className="w-8 h-8 text-xs rounded-full bg-linear-to-br from-violet-500 to-purple-600 flex items-center justify-center font-semibold text-white shrink-0 select-none"
+            style={{ boxShadow: 'rgba(255, 255, 255, 0.25) 0px 1px 0px inset, rgba(0, 0, 0, 0.35) 0px 2px 8px' }}
+          >
+            AC
+          </div>
+        </div>
+      )}
+
+      <div className={cn('max-w-[62%] flex flex-col', mine ? 'items-end' : 'items-start')}>
+        {!mine && <p className="text-tiny text-[rgba(255,255,255,0.3)] mb-1 px-1">Aria Chen</p>}
+        <MessageBubble message={message} />
+        <p className="text-tiny text-[rgba(255,255,255,0.18)] mt-1 px-1">{message.time}</p>
       </div>
     </div>
   )
@@ -55,9 +69,9 @@ export function ConversationView({ conversationId }: { conversationId: string })
       />
 
       <ScrollArea className="min-h-0 flex-1">
-        <div className="flex flex-col gap-3 px-6 py-5">
+        <div className="flex-1 px-5 py-5 space-y-1">
           {messages.map((message) => (
-            <MessageBubble key={message.id} message={message} />
+            <MessageRow key={message.id} message={message} />
           ))}
         </div>
       </ScrollArea>

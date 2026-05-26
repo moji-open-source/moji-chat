@@ -95,13 +95,13 @@ export const conversations: Conversation[] = [
 
 export const messagesByConversation: Record<string, Message[]> = {
   c1: [
-    { id: 'c1', sender: 'other', text: 'Hey! Did you get a chance to look at the new designs?', time: '2:08 PM' },
-    { id: 'c1', sender: 'me', text: 'Just opened them now — the color palette is stunning', time: '2:09 PM' },
-    { id: 'c1', sender: 'other', text: 'Thanks! I went with a darker base this time. Felt more premium.', time: '2:10 PM' },
-    { id: 'c1', sender: 'me', text: 'It really shows. The purple accent works perfectly against it.', time: '2:11 PM' },
-    { id: 'c1', sender: 'other', text: 'Exactly what I was going for 🎨 Also tweaked the typography — switched to Inter.', time: '2:12 PM' },
-    { id: 'c1', sender: 'me', text: 'Smart call. Readable and modern without being generic.', time: '2:13 PM' },
-    { id: 'c1', sender: 'other', text: 'Sent you the Figma file! Let me know what you think 🎨', time: '2:14 PM' },
+    { id: '1', sender: 'other', text: 'Hey! Did you get a chance to look at the new designs?', time: '2:08 PM' },
+    { id: '2', sender: 'me', text: 'Just opened them now — the color palette is stunning', time: '2:09 PM' },
+    { id: '3', sender: 'other', text: 'Thanks! I went with a darker base this time. Felt more premium.', time: '2:10 PM' },
+    { id: '4', sender: 'me', text: 'It really shows. The purple accent works perfectly against it.', time: '2:11 PM' },
+    { id: '5', sender: 'other', text: 'Exactly what I was going for 🎨 Also tweaked the typography — switched to Inter.', time: '2:12 PM' },
+    { id: '6', sender: 'me', text: 'Smart call. Readable and modern without being generic.', time: '2:13 PM' },
+    { id: '7', sender: 'other', text: 'Sent you the Figma file! Let me know what you think 🎨', time: '2:14 PM' },
   ],
 }
 
