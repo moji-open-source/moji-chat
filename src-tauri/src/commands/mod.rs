@@ -1,7 +1,9 @@
 mod auth;
+mod contact;
+mod conversation;
 mod window;
 
-/// Re-export all command functions so `lib.rs` can register them
-/// with `tauri::generate_handler!` in one place.
 pub use auth::login;
-pub use window::open_app_setting_window;
+pub use contact::{get_contact, list_contacts};
+pub use conversation::{get_conversation, get_messages, list_conversations};
+pub use window::open_settings_window;

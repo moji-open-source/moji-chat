@@ -1,12 +1,13 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Pin, Plus, Search } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
-import { conversations, type Conversation } from '@/features/messages/data'
+import { listConversations, type Conversation } from '@/bindings'
 import { Listbox, ListboxContent, ListboxItem, ListboxGroup, ListboxGroupLabel } from '@/components/ui/listbox'
 
 function ConversationItem({ conversation }: { conversation: Conversation }) {
@@ -45,7 +46,6 @@ function ConversationItem({ conversation }: { conversation: Conversation }) {
           </p>
         </div>
         {
-          // background: linear-gradient(135deg, rgb(124, 58, 237), rgb(109, 40, 217)); box-shadow: rgba(124, 58, 237, 0.4) 0px 2px 6px;
           Boolean(conversation.unread) && <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center text-tiny font-bold text-white shrink-0 bg-linear-to-br from-violet-600 to-violet-700 shadow-violet-600/40 shadow-md" >{conversation.unread}</div>
         }
 
@@ -57,11 +57,13 @@ function ConversationItem({ conversation }: { conversation: Conversation }) {
 function ConversationGroup({
   title,
   pinned,
+  conversations,
 }: {
   title: string
   pinned?: boolean
+  conversations: Conversation[]
 }) {
-  const items = conversations.filter((conversation) => Boolean(conversation.pinned) === Boolean(pinned))
+  const items = conversations.filter((c) => Boolean(c.pinned) === Boolean(pinned))
 
   return (
     <ListboxGroup asChild className="p-0">
@@ -81,7 +83,6 @@ function ConversationGroup({
     </ListboxGroup>
   )
 }
-
 
 function ConversationHeader() {
   return (
@@ -107,6 +108,11 @@ function ConversationHeader() {
 
 export function ConversationList() {
   const router = useRouter()
+  const [conversations, setConversations] = useState<Conversation[]>([])
+
+  useEffect(() => {
+    listConversations().then(setConversations).catch(console.error)
+  }, [])
 
   function handleConversationSelect(conversationId: string) {
     router.push(`/messages/${conversationId}`)
@@ -117,8 +123,8 @@ export function ConversationList() {
       <ConversationHeader />
       <Listbox onValueChange={handleConversationSelect}>
         <ListboxContent className="border-none! border-0! bg-transparent! flex-1 overflow-y-auto px-1.75 pb-4 pt-0 space-y-4 scrollbar-hide">
-          <ConversationGroup title="Pinned" pinned />
-          <ConversationGroup title="Recent" />
+          <ConversationGroup title="Pinned" pinned conversations={conversations} />
+          <ConversationGroup title="Recent" conversations={conversations} />
         </ListboxContent>
       </Listbox>
     </>

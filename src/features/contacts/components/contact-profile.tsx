@@ -1,15 +1,19 @@
-import { notFound } from 'next/navigation'
+'use client'
+
+import { useEffect, useState } from 'react'
 import { MessageSquareText, MoreHorizontal, Phone, UserPlus, Video } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { getContact } from '@/features/contacts/data'
+import { getContact, type Contact } from '@/bindings'
 
 export function ContactProfile({ contactId }: { contactId: string }) {
-  const contact = getContact(contactId)
+  const [contact, setContact] = useState<Contact | null>(null)
 
-  if (!contact) {
-    notFound()
-  }
+  useEffect(() => {
+    getContact(contactId).then(setContact).catch(console.error)
+  }, [contactId])
+
+  if (!contact) return null
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
@@ -81,13 +85,6 @@ export function ContactProfile({ contactId }: { contactId: string }) {
             <div className="rounded-lg border bg-card p-4">
               <p className="text-xs font-medium text-muted-foreground">状态</p>
               <p className="mt-2 text-sm">{contact.online ? '在线' : '离线'}</p>
-            </div>
-            <div className="rounded-lg border bg-card p-4 sm:col-span-2">
-              <p className="text-xs font-medium text-muted-foreground">模块说明</p>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                这个详情页只关心右侧信息展示。联系人列表留在上层 layout 中，
-                因此切换联系人时 URL 和右侧内容变化，列表栏保持稳定。
-              </p>
             </div>
           </div>
         </section>

@@ -1,4 +1,4 @@
-import type { Conversation, Message } from '@/features/messages/data'
+import type { Conversation, Message } from '@/bindings'
 
 export interface ConversationViewProps {
   conversationId: string

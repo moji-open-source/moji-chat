@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/tooltip'
 import { SETTINGS_ROUTE } from '@/features/settings/constants'
 import { cn } from '@/lib/utils'
-import { canOpenDesktopWindow, openAppSettingWindow } from '@/services/window'
+import { canOpenNativeWindow, openSettingsWindow } from '@/bindings'
 
 interface OpenSettingsButtonProps {
   className?: string
@@ -26,7 +26,7 @@ export function OpenSettingsButton({ className }: OpenSettingsButtonProps) {
     if (isOpening)
       return
 
-    if (!canOpenDesktopWindow()) {
+    if (!canOpenNativeWindow()) {
       router.push(SETTINGS_ROUTE)
       return
     }
@@ -34,7 +34,7 @@ export function OpenSettingsButton({ className }: OpenSettingsButtonProps) {
     setIsOpening(true)
 
     try {
-      await openAppSettingWindow()
+      await openSettingsWindow()
     } catch (error) {
       console.error('Failed to open settings window:', error)
     } finally {

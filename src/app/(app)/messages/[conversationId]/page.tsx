@@ -1,10 +1,17 @@
 import { ConversationView } from '@/features/messages/components/conversation-view'
-import { conversations } from '@/features/messages/data'
 
+// Static params for build-time route generation.
+// These must match the IDs returned by the Rust `list_conversations` command.
 export function generateStaticParams() {
-  return conversations.map((conversation) => ({
-    conversationId: conversation.id,
-  }))
+  return [
+    { conversationId: 'c1' },
+    { conversationId: 'c2' },
+    { conversationId: 'c3' },
+    { conversationId: 'c4' },
+    { conversationId: 'c5' },
+    { conversationId: 'c6' },
+    { conversationId: 'c7' },
+  ]
 }
 
 export default async function ConversationPage({

@@ -2,44 +2,50 @@
 
 use std::fs;
 
-use commands::{login, open_app_setting_window};
-use manager::app_handle::AppHandleManager;
 use tauri::Manager;
-use utils::window::WebviewWindowExt;
 
 mod commands;
-mod manager;
-mod utils;
+mod error;
+mod events;
+mod models;
+mod platform;
+mod services;
+mod state;
+
+use commands::{
+    get_contact, get_conversation, get_messages, list_contacts, list_conversations, login,
+    open_settings_window,
+};
+use state::AppState;
 
 #[tokio::main]
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub async fn run() {
     tauri::Builder::default()
+        .manage(AppState::new())
         .setup(|app| {
-            let app_data_dir = app
-                .path()
-                .app_data_dir()
-                .expect("failed to get app data dir");
+            let data_dir = app.path().app_data_dir()?;
+            fs::create_dir_all(&data_dir)?;
 
-            // Ensure the app-data directory exists (used by future features).
-            fs::create_dir_all(&app_data_dir)?;
-
-            AppHandleManager::global().init(app.app_handle().clone());
-
-            #[cfg(target_os = "macos")]
-            if let Some(window) = app.get_webview_window("main") {
-                window.to_native_window();
-            }
-
-            #[cfg(target_os = "macos")]
-            if let Some(window) = app.get_webview_window("main1") {
-                window.to_native_window();
+            // Apply native window chrome to pre-defined windows.
+            for label in ["main", "main1"] {
+                if let Some(win) = app.get_webview_window(label) {
+                    platform::apply_native_chrome(&win);
+                }
             }
 
             Ok(())
         })
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![login, open_app_setting_window])
+        .invoke_handler(tauri::generate_handler![
+            login,
+            open_settings_window,
+            list_contacts,
+            get_contact,
+            list_conversations,
+            get_conversation,
+            get_messages,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
