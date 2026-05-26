@@ -7,13 +7,6 @@ export function ConversationEmpty() {
         <div className="flex size-12 items-center justify-center rounded-xl bg-muted text-muted-foreground">
           <MessageSquareText />
         </div>
-        <div className="flex flex-col gap-1">
-          <h2 className="text-base font-semibold">选择一个会话</h2>
-          <p className="text-sm leading-6 text-muted-foreground">
-            当前页面用于承载消息详情。左侧列表保持不变，右侧会根据
-            `/messages/[conversationId]` 渲染具体会话。
-          </p>
-        </div>
       </div>
     </div>
   )
