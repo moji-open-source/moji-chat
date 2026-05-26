@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { MoreHorizontal, Phone, Send, Video } from 'lucide-react'
+import { Phone, Send, Video, Info } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -49,31 +49,10 @@ export function ConversationView({ conversationId }: { conversationId: string })
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
-      <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-5">
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-sm font-medium">
-            {conversation.name.slice(0, 1)}
-          </span>
-          <div className="min-w-0">
-            <h2 className="truncate text-sm font-semibold">{conversation.name}</h2>
-            <p className="truncate text-xs text-muted-foreground">
-              {conversation.online ? '在线' : '上次活跃：昨天'}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex shrink-0 items-center gap-1">
-          <Button variant="ghost" size="icon" className="size-8" aria-label="语音通话">
-            <Phone />
-          </Button>
-          <Button variant="ghost" size="icon" className="size-8" aria-label="视频通话">
-            <Video />
-          </Button>
-          <Button variant="ghost" size="icon" className="size-8" aria-label="更多操作">
-            <MoreHorizontal />
-          </Button>
-        </div>
-      </header>
+      <ConversationViewHeader
+        name={conversation.name}
+        online={conversation.online}
+      />
 
       <ScrollArea className="min-h-0 flex-1">
         <div className="flex flex-col gap-3 px-6 py-5">
@@ -96,4 +75,48 @@ export function ConversationView({ conversationId }: { conversationId: string })
       </footer>
     </div>
   )
+}
+
+function ConversationViewHeader({
+  name,
+  online,
+}: {
+  name: string
+  online: boolean
+}) {
+  return (
+    <header data-tauri-drag-region className="h-14.5 flex items-center justify-between px-5 shrink-0 border-b">
+      <div className="flex items-center gap-3">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-sm font-medium">
+          {name.slice(0, 1)}
+        </span>
+        <div className="min-w-0">
+          <h2 className="text-sm font-semibold leading-snug">{name}</h2>
+          <p className="text-[11px] mt-0.5 text-[rgba(255,255,255,0.3)]">
+            {online ? 'Active now' : 'Offline'}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-0.5">
+        <ConversationViewHeaderIcon label="Voice call">
+          <Phone />
+        </ConversationViewHeaderIcon>
+
+        <ConversationViewHeaderIcon label="Video call">
+          <Video />
+        </ConversationViewHeaderIcon>
+
+        <ConversationViewHeaderIcon label="Info">
+          <Info />
+        </ConversationViewHeaderIcon>
+      </div>
+    </header>
+  )
+}
+
+function ConversationViewHeaderIcon({ children, label }: React.PropsWithChildren & { label: string }) {
+  return <Button variant="ghost" size="icon" className="size-8 [&_svg]:size-4.25! text-[rgba(255,255,255,0.3)]" aria-label={label}>
+    {children}
+  </Button>
 }
