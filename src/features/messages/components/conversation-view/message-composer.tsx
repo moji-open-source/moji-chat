@@ -1,7 +1,33 @@
-import { Send } from 'lucide-react'
+'use client'
+import { Send, Paperclip, Smile, Scissors, History } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+
+const Tiptap = () => {
+  const editor = useEditor({
+    autofocus: true,
+    extensions: [StarterKit],
+    editorProps: {
+      attributes: {
+        autoCapitalize: 'off',
+        autoComplete: 'off',
+        autoCorrect: 'off',
+        class: 'outline-none overflow-y-auto flex-1 bg-transparent text-sm outline-none resize-none leading-relaxed max-h-[120px]',
+      },
+    },
+    content: '',
+    // Don't render immediately on the server to avoid SSR issues
+    immediatelyRender: false,
+  })
+
+  return <EditorContent
+    editor={editor}
+    className="h-full border-0 bg-transparent shadow-none"
+  />
+}
 
 /**
  * The composer stays isolated so send actions, attachments,
@@ -9,22 +35,34 @@ import { Input } from '@/components/ui/input'
  */
 export function MessageComposer() {
   return (
-    <footer className="shrink-0 border-t p-4">
-      <div className="flex items-center gap-2 rounded-xl border bg-card p-2">
-        <Input
-          aria-label="Message"
-          placeholder="输入消息..."
-          className="h-9 border-0 bg-transparent shadow-none focus-visible:ring-0"
-        />
-        <Button
-          type="button"
-          size="icon"
-          className="size-9 rounded-lg"
-          aria-label="发送消息"
-        >
-          <Send aria-hidden="true" />
-        </Button>
+    <footer className="px-4 pb-4 pt-1.5 shrink-0 relative">
+      <div className="rounded-[18px] overflow-hidden bg-white/5 backdrop:blur-[32px] backdrop:saturate-80 border border-white/10 shadow-[white/30,0px,2px,16px,black/6,0,1,0,inset]">
+        {/* <div className="flex flex-wrap gap-1.5 px-3 pt-3"></div> */}
+        <div className="flex items-center gap-0.5 px-3 pt-2.5 pb-1.5">
+          <ToolIcon><Scissors /></ToolIcon>
+          <ToolIcon><Smile /></ToolIcon>
+          <ToolIcon><Paperclip /></ToolIcon>
+          <div className="flex-1"></div>
+          <ToolIcon><History /></ToolIcon>
+        </div>
+
+        <div className="mx-3 h-[0.5px] bg-white/6"></div>
+
+        <div className="px-3 py-2">
+          <Tiptap />
+        </div>
+
+        <div className="flex items-center justify-between px-3 pb-2.5">
+          <p className="text-tiny text-white/14"> newline</p>
+          <Button variant="ghost" className="text-white/18 [&_svg]:size-3 text-[12px] h-7.5 bg-white/6 hover:text-white/60!">
+            <Send /> Send
+          </Button>
+        </div>
       </div>
     </footer>
   )
+}
+
+function ToolIcon({ children }: React.PropsWithChildren) {
+  return <Button variant="ghost" className="size-6 p-0 text-white/32 hover:text-white/65 [&_svg]:size-3.5">{children}</Button>
 }

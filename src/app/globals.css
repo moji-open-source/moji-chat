@@ -128,14 +128,7 @@
     @apply bg-background text-foreground;
   }
 
-  div,
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply select-none cursor-default;
+  :where(div, p, h1, h2, h3, h4, h5, h6):not([contenteditable='true'], [contenteditable='true'] *) {
+    @apply select-none cursor-auto;
   }
 }
