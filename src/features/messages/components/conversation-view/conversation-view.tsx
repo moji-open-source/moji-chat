@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Group, Panel, Separator } from 'react-resizable-panels'
 
 import { getConversation, getMessages, type Conversation, type Message } from '@/bindings'
 
@@ -23,8 +24,15 @@ export function ConversationView({ conversationId }: ConversationViewProps) {
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
       <ConversationHeader conversation={conversation} />
-      <MessageList conversation={conversation} messages={messages} />
-      <MessageComposer />
+      <Group orientation="vertical">
+        <Panel>
+          <MessageList conversation={conversation} messages={messages} />
+        </Panel>
+        <Separator />
+        <Panel groupResizeBehavior="preserve-pixel-size" defaultSize={180} minSize={143} maxSize={250}>
+          <MessageComposer />
+        </Panel>
+      </Group>
     </div>
   )
 }
