@@ -1,5 +1,5 @@
 import { ThreePaneLayout } from '@/components/layout/three-pane-layout'
-import { ConversationList } from '@/features/messages/components/conversation-list'
+import { ConversationList } from '@/features/messages/components/conversation-list/index'
 
 export default function MessagesLayout({
   children,
