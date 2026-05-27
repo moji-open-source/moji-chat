@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useAtom } from 'jotai'
 import { Pin, Plus, Search } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -9,11 +9,9 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { listConversations, type Conversation } from '@/bindings'
 import { Listbox, ListboxContent, ListboxItem, ListboxGroup, ListboxGroupLabel } from '@/components/ui/listbox'
+import { activeConversationAtom } from '@/store/ui'
 
-function ConversationItem({ conversation }: { conversation: Conversation }) {
-  const pathname = usePathname()
-  const href = `/messages/${conversation.id}`
-  const active = pathname === href
+function ConversationItem({ conversation, active }: { conversation: Conversation; active: boolean }) {
 
   return (
     <ListboxItem asChild value={conversation.id}>
@@ -58,10 +56,12 @@ function ConversationGroup({
   title,
   pinned,
   conversations,
+  activeId,
 }: {
   title: string
   pinned?: boolean
   conversations: Conversation[]
+  activeId: string | null
 }) {
   const items = conversations.filter((c) => Boolean(c.pinned) === Boolean(pinned))
 
@@ -76,7 +76,7 @@ function ConversationGroup({
         </ListboxGroupLabel>
         <div className="flex flex-col gap-1">
           {items.map((conversation) => (
-            <ConversationItem key={conversation.id} conversation={conversation} />
+            <ConversationItem key={conversation.id} conversation={conversation} active={activeId === conversation.id} />
           ))}
         </div>
       </section>
@@ -107,24 +107,20 @@ function ConversationHeader() {
 }
 
 export function ConversationList() {
-  const router = useRouter()
+  const [activeId, setActiveId] = useAtom(activeConversationAtom)
   const [conversations, setConversations] = useState<Conversation[]>([])
 
   useEffect(() => {
     listConversations().then(setConversations).catch(console.error)
   }, [])
 
-  function handleConversationSelect(conversationId: string) {
-    router.push(`/messages/${conversationId}`)
-  }
-
   return (
     <>
       <ConversationHeader />
-      <Listbox onValueChange={handleConversationSelect}>
+      <Listbox onValueChange={setActiveId}>
         <ListboxContent className="border-none! border-0! bg-transparent! flex-1 overflow-y-auto px-1.75 pb-4 pt-0 space-y-4 scrollbar-hide">
-          <ConversationGroup title="Pinned" pinned conversations={conversations} />
-          <ConversationGroup title="Recent" conversations={conversations} />
+          <ConversationGroup title="Pinned" pinned conversations={conversations} activeId={activeId} />
+          <ConversationGroup title="Recent" conversations={conversations} activeId={activeId} />
         </ListboxContent>
       </Listbox>
     </>

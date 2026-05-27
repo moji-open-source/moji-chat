@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useAtom } from 'jotai'
 import { Plus, Search } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -10,8 +9,10 @@ import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import { listContacts, type Contact } from '@/bindings'
+import { activeContactAtom } from '@/store/ui'
 
 export function ContactList() {
+  const [activeId, setActiveId] = useAtom(activeContactAtom)
   const [contacts, setContacts] = useState<Contact[]>([])
 
   useEffect(() => {
@@ -45,7 +46,12 @@ export function ContactList() {
       <ScrollArea className="min-h-0 flex-1">
         <div className="flex flex-col gap-1 p-2">
           {contacts.map((contact) => (
-            <ContactItem key={contact.id} contact={contact} />
+            <ContactItem
+              key={contact.id}
+              contact={contact}
+              active={activeId === contact.id}
+              onSelect={setActiveId}
+            />
           ))}
         </div>
       </ScrollArea>
@@ -53,16 +59,13 @@ export function ContactList() {
   )
 }
 
-function ContactItem({ contact }: { contact: Contact }) {
-  const pathname = usePathname()
-  const href = `/contacts/${contact.id}`
-  const active = pathname === href
-
+function ContactItem({ contact, active, onSelect }: { contact: Contact; active: boolean; onSelect: (id: string) => void }) {
   return (
-    <Link
-      href={href}
+    <button
+      type="button"
+      onClick={() => onSelect(contact.id)}
       className={cn(
-        'flex min-w-0 gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-accent',
+        'flex min-w-0 gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-accent text-left w-full',
         active && 'bg-accent text-accent-foreground',
       )}
     >
@@ -83,6 +86,6 @@ function ContactItem({ contact }: { contact: Contact }) {
           {contact.status}
         </span>
       </span>
-    </Link>
+    </button>
   )
 }
