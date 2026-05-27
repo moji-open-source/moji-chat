@@ -10,22 +10,22 @@ const Tiptap = () => {
   const editor = useEditor({
     autofocus: true,
     extensions: [StarterKit],
+    textDirection: 'ltr',
     editorProps: {
       attributes: {
         autoCapitalize: 'off',
         autoComplete: 'off',
         autoCorrect: 'off',
-        class: 'h-full outline-none overflow-y-auto flex-1 bg-transparent text-sm outline-none resize-none leading-relaxed',
+        class: 'min-h-full outline-none text-sm leading-relaxed',
       },
     },
-    content: '',
     // Don't render immediately on the server to avoid SSR issues
     immediatelyRender: false,
   })
 
   return <EditorContent
     editor={editor}
-    className="h-full border-0 bg-transparent shadow-none"
+    className="h-full overflow-y-auto border-0 bg-transparent shadow-none"
   />
 }
 
