@@ -10,7 +10,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { listContacts, type Contact } from '@/bindings'
 import { activeContactAtom } from '@/store/ui'
 
-import { ContactItem } from './contact-item'
+import { ContactItem } from './item'
 
 export function ContactList() {
   const [activeId, setActiveId] = useAtom(activeContactAtom)

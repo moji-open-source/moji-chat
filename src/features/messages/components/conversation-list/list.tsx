@@ -7,8 +7,8 @@ import { listConversations, type Conversation } from '@/bindings'
 import { Listbox, ListboxContent } from '@/components/ui/listbox'
 import { activeConversationAtom } from '@/store/ui'
 
-import { ConversationGroup } from './conversation-group'
-import { ConversationListHeader } from './conversation-list-header'
+import { ConversationGroup } from './group'
+import { ConversationListHeader } from './header'
 
 export function ConversationList() {
   const [activeId, setActiveId] = useAtom(activeConversationAtom)

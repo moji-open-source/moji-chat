@@ -3,7 +3,7 @@ import { Pin } from 'lucide-react'
 import type { Conversation } from '@/bindings'
 import { ListboxGroup, ListboxGroupLabel } from '@/components/ui/listbox'
 
-import { ConversationItem } from './conversation-item'
+import { ConversationItem } from './item'
 
 interface ConversationGroupProps {
   title: string
