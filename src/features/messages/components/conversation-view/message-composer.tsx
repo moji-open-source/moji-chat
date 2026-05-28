@@ -36,7 +36,7 @@ const Tiptap = () => {
 export function MessageComposer() {
   return (
     <footer className="px-4 pb-4 pt-1.5 shrink-0 relative h-full">
-      <div className="h-full w-full flex flex-col rounded-[18px] overflow-hidden bg-white/5 backdrop:blur-[32px] backdrop:saturate-80 border border-white/10 shadow-[white/30,0px,2px,16px,black/6,0,1,0,inset]">
+      <div className="h-full w-full flex flex-col rounded-[18px] overflow-hidden dark:bg-white/5 bg-white/80 backdrop:blur-[32px] backdrop:saturate-80 border border-white/10 shadow-glass">
         {/* <div className="flex flex-wrap gap-1.5 px-3 pt-3"></div> */}
         <div className="flex items-center gap-0.5 px-3 pt-2.5 pb-1.5">
           <ToolIcon><Scissors /></ToolIcon>
