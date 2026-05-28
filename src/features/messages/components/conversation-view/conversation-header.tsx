@@ -28,14 +28,14 @@ export function ConversationHeader({ conversation }: ConversationHeaderProps) {
 
       <div className="flex items-center gap-0.5">
         {CONVERSATION_HEADER_ACTIONS.map((action) => (
-          <ConversationHeaderAction key={action.label} action={action} />
+          <ActionButton key={action.label} action={action} />
         ))}
       </div>
     </header>
   )
 }
 
-function ConversationHeaderAction({ action }: { action: ConversationHeaderAction }) {
+function ActionButton({ action }: { action: ConversationHeaderAction }) {
   const Icon = action.icon
 
   return (
