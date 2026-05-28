@@ -17,11 +17,11 @@ export function ThreePaneLayout({
   disableResize,
 }: ThreePaneLayoutProps) {
   return (
-    <Group className="flex h-full min-h-0 min-w-0 flex-1 overflow-hidden bg-[#13131d]" disabled={disableResize}>
+    <Group className="flex h-full min-h-0 min-w-0 flex-1 overflow-hidden" disabled={disableResize}>
       <Panel groupResizeBehavior="preserve-pixel-size" defaultSize={288} maxSize={400} minSize={200}>
         <aside
           className={cn(
-            'size-full flex flex-col shrink-0',
+            'size-full flex flex-col shrink-0 bg-[#12121c]/74',
             listClassName,
           )}
         >
@@ -30,14 +30,14 @@ export function ThreePaneLayout({
       </Panel>
       <Separator />
       <Panel className="overflow-visible!">
-        <section
+        <main
           className={cn(
-            'size-full flex min-w-0 flex-1 flex-col bg-background border-l border-border rounded-l-2xl shadow-border/40 shadow-lg',
+            'size-full flex min-w-0 flex-1 flex-col border-l border-border rounded-l-2xl shadow-border/40 shadow-lg',
             contentClassName,
           )}
         >
           {children}
-        </section>
+        </main>
       </Panel>
     </Group>
   )

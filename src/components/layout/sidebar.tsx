@@ -43,7 +43,7 @@ export function Sidebar({ pathname }: Props) {
   return (
     <aside
       data-tauri-drag-region
-      className="flex w-14 shrink-0 flex-col items-center border-r bg-sidebar px-2 py-2 pt-14 text-sidebar-foreground"
+      className="flex w-14 shrink-0 flex-col items-center border-r bg-sidebar/84 px-2 py-2 pt-14 text-sidebar-foreground"
     >
       <nav
         data-tauri-drag-region

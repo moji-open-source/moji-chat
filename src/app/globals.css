@@ -47,6 +47,10 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+@utility bg-tahoe-dark {
+  background: var(--tahoe);
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -81,6 +85,8 @@
   --sidebar-accent-foreground: #c4c4d8;
   --sidebar-border: rgba(255, 255, 255, 0.06);
   --sidebar-ring: #7c3aed;
+
+  --tahoe: radial-gradient(80% 60% at 15% 0%, rgba(168, 85, 247, 0.07) 0%, transparent 55%), rgb(245, 243, 255);
 }
 
 .dark {
@@ -117,6 +123,8 @@
   --sidebar-accent-foreground: #c4c4d8;
   --sidebar-border: rgba(255, 255, 255, 0.06);
   --sidebar-ring: #7c3aed;
+
+  --tahoe: radial-gradient(80% 60% at 15% 0%, rgba(88, 28, 220, 0.13) 0%, transparent 55%), rgb(11, 11, 18);
 }
 
 @layer base {
