@@ -15,7 +15,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         className="flex min-h-0 flex-1 overflow-hidden rounded-2xl border shadow-sm"
       >
         <Sidebar pathname={pathname} />
-        <section className="flex min-w-0 flex-1 overflow-hidden">{children}</section>
+        <section className="flex min-w-0 flex-1 overflow-hidden border-l border-border rounded-l-2xl shadow-border/40 shadow-lg">{children}</section>
       </div>
     </main>
   )
