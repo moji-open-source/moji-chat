@@ -42,7 +42,7 @@ function ActionButton({ action }: { action: ConversationHeaderAction }) {
     <Button
       variant="ghost"
       size="icon"
-      className="size-8 text-muted-foreground"
+      className="size-8 text-muted-foreground hover:text-accent-foreground/70"
       aria-label={action.label}
     >
       <Icon aria-hidden="true" />
