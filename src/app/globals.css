@@ -147,6 +147,10 @@
     @apply select-none cursor-auto;
   }
 
+  [data-user-select] {
+    @apply **:select-auto;
+  }
+
   ::-webkit-scrollbar {
     height: 1rem;
     width: 1rem;
