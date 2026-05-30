@@ -1,10 +1,34 @@
 use objc2::rc::Retained;
-use objc2_app_kit::NSWindow;
+use objc2_app_kit::{NSWindow, NSWindowButton};
 use tauri::WebviewWindow;
+
+use super::WindowButton;
+
+impl From<WindowButton> for NSWindowButton {
+    fn from(val: WindowButton) -> Self {
+        match val {
+            WindowButton::Zoom => NSWindowButton::ZoomButton,
+        }
+    }
+}
+
+/// Show or hide a standard title bar button (close, minimize, zoom).
+pub fn set_window_button_visible<R: tauri::Runtime>(
+    window: &WebviewWindow<R>,
+    button: WindowButton,
+    visible: bool,
+) {
+    let Some(ns_window) = get_ns_window(window) else {
+        return;
+    };
+    if let Some(btn) = ns_window.standardWindowButton(button.into()) {
+        btn.setHidden(!visible);
+    }
+}
 
 /// Returns the native handle that is used by this window.
 #[cfg(target_os = "macos")]
-fn get_ns_window<R: tauri::Runtime>(window: &WebviewWindow<R>) -> Option<Retained<NSWindow>> {
+pub fn get_ns_window<R: tauri::Runtime>(window: &WebviewWindow<R>) -> Option<Retained<NSWindow>> {
     window
         .ns_window()
         .ok()

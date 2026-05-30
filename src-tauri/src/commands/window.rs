@@ -27,6 +27,7 @@ pub fn open_settings_window(app: AppHandle) -> Result<(), AppError> {
         .map_err(|e| AppError::window(e.to_string()))?;
 
     platform::apply_native_chrome(&win);
+    platform::set_window_button_visible(&win, platform::WindowButton::Zoom, false);
 
     Ok(())
 }
