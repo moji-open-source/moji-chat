@@ -7,7 +7,7 @@ import { ThemeSegment } from './theme-segment'
 
 export function SettingsView() {
   return (
-    <main className="flex-1 flex flex-col min-w-0 bg-background overflow-auto">
+    <main className="flex-1 flex flex-col min-w-0 overflow-auto bg-tahoe-dark">
       <div className="flex-1 overflow-y-auto px-8 py-8 pt-11! space-y-6 flex h-full min-h-0 flex-col">
         <SettingsSection title="Appearance">
           <SettingsRow label="Theme" sub="Choose between dark and light mode" right={<ThemeSegment />} border={false} />
