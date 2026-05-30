@@ -21,8 +21,6 @@ pub fn open_settings_window(app: AppHandle) -> Result<(), AppError> {
         .inner_size(SETTINGS_WIDTH, SETTINGS_HEIGHT)
         .hidden_title(true)
         .title_bar_style(tauri::TitleBarStyle::Overlay)
-        .closable(false)
-        .minimizable(false)
         .maximizable(false)
         .resizable(false)
         .build()
