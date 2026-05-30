@@ -89,6 +89,8 @@
   --sidebar-ring: #7c3aed;
 
   --tahoe: radial-gradient(80% 60% at 15% 0%, rgba(168, 85, 247, 0.07) 0%, transparent 55%), rgb(245, 243, 255);
+
+  --scrollbar-thumb-bg: hsla(0, 0%, 89%, .8);
 }
 
 .dark {
@@ -128,6 +130,8 @@
 
   --tahoe: radial-gradient(80% 60% at 15% 0%, rgba(88, 28, 220, 0.13) 0%, transparent 55%), rgb(11, 11, 18);
   --shadow-glass: rgba(0, 0, 0, 0.3) 0px 2px 16px, rgba(255, 255, 255, 0.06) 0px 1px 0px inset;
+
+  --scrollbar-thumb-bg: hsla(0, 0%, 100%, .1);
 }
 
 @layer base {
@@ -141,5 +145,16 @@
 
   :where(div, p, h1, h2, h3, h4, h5, h6):not([contenteditable='true'], [contenteditable='true'] *) {
     @apply select-none cursor-auto;
+  }
+
+  ::-webkit-scrollbar {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: .25rem solid transparent;
+    box-shadow: .5rem .5rem 0 var(--scrollbar-thumb-bg) inset;
   }
 }
