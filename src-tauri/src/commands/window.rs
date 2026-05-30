@@ -31,6 +31,7 @@ fn create_settings_window(app: &AppHandle) -> Result<(), AppError> {
         .hidden_title(true)
         .title_bar_style(tauri::TitleBarStyle::Overlay)
         .maximizable(false)
+        .accept_first_mouse(true)
         .resizable(false)
         .build()
         .map_err(|e| AppError::window(e.to_string()))?;

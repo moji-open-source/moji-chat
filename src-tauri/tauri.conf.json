@@ -16,6 +16,7 @@
         "height": 670,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay",
+        "acceptFirstMouse": true,
         "url": "/login",
         "resizable": false,
         "visible": true
@@ -26,6 +27,7 @@
         "height": 750,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay",
+        "acceptFirstMouse": true,
         "url": "/messages",
         "visible": true
       }
