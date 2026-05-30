@@ -13,7 +13,9 @@ import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
  */
 export function WinDisplayController() {
   useEffect(() => {
-    setTimeout(getCurrentWebviewWindow().show, 30)
+    document.fonts.ready.then(() => {
+      setTimeout(getCurrentWebviewWindow().show)
+    })
   }, [])
 
   return undefined
