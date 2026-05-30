@@ -6,7 +6,7 @@ interface SettingsSectionProps {
 export function SettingsSection({ title, children }: SettingsSectionProps) {
   return (
     <div>
-      <p className="text-[11px] font-semibold uppercase tracking-widest mb-2 px-1 text-muted-foreground/50">{title}</p>
+      <p data-tauri-drag-region className="text-[11px] font-semibold uppercase tracking-widest mb-2 px-1 text-muted-foreground/50">{title}</p>
       <div className="rounded-[14px] overflow-hidden bg-black/4 dark:bg-white/6 border border-black/7 dark:border-white/7">{children}</div>
     </div>
   )
