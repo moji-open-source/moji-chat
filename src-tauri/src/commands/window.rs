@@ -33,6 +33,7 @@ fn create_settings_window(app: &AppHandle) -> Result<(), AppError> {
         .maximizable(false)
         .accept_first_mouse(true)
         .resizable(false)
+        .visible(false)
         .build()
         .map_err(|e| AppError::window(e.to_string()))?;
 
