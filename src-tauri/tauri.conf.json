@@ -26,7 +26,8 @@
         "height": 750,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay",
-        "url": "/messages"
+        "url": "/messages",
+        "visible": true
       }
     ],
     "security": {
