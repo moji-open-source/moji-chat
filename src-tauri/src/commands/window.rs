@@ -26,10 +26,16 @@ fn focus_window(win: &tauri::WebviewWindow) -> Result<(), AppError> {
 
 /// Build a new settings window and apply platform chrome.
 fn create_settings_window(app: &AppHandle) -> Result<(), AppError> {
-    let win = WebviewWindowBuilder::new(app, SETTINGS_LABEL, WebviewUrl::App(SETTINGS_URL.into()))
-        .inner_size(SETTINGS_WIDTH, SETTINGS_HEIGHT)
+    let builder =
+        WebviewWindowBuilder::new(app, SETTINGS_LABEL, WebviewUrl::App(SETTINGS_URL.into()));
+
+    #[cfg(target_os = "macos")]
+    let builder = builder
         .hidden_title(true)
-        .title_bar_style(tauri::TitleBarStyle::Overlay)
+        .title_bar_style(tauri::TitleBarStyle::Overlay);
+
+    let webview_window = builder
+        .inner_size(SETTINGS_WIDTH, SETTINGS_HEIGHT)
         .maximizable(false)
         .accept_first_mouse(true)
         .resizable(false)
@@ -37,8 +43,8 @@ fn create_settings_window(app: &AppHandle) -> Result<(), AppError> {
         .build()
         .map_err(|e| AppError::window(e.to_string()))?;
 
-    platform::apply_native_chrome(&win);
-    platform::set_window_button_visible(&win, platform::WindowButton::Zoom, false);
+    platform::apply_native_chrome(&webview_window);
+    platform::set_window_button_visible(&webview_window, platform::WindowButton::Zoom, false);
 
     Ok(())
 }

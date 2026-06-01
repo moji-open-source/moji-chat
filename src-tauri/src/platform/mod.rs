@@ -24,4 +24,6 @@ pub fn set_window_button_visible(window: &WebviewWindow, button: WindowButton, v
 
     #[cfg(not(target_os = "macos"))]
     let _ = window;
+    let _ = button;
+    let _ = visible;
 }
