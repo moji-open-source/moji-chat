@@ -23,8 +23,10 @@
       },
       {
         "label": "main1",
-        "width": 950,
-        "height": 750,
+        "minWidth": 711,
+        "minHeight": 520,
+        "width": 934,
+        "height": 683,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay",
         "acceptFirstMouse": true,
