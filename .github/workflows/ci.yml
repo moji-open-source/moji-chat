@@ -36,13 +36,14 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 9.14.2
+          version: latest
 
       - name: Set node version to LTS
         uses: actions/setup-node@v2
         with:
-          node-version: 22
+          node-version: latest
           cache: 'pnpm'
+
 
       - run: pnpm install
 
