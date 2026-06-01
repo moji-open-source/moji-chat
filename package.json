@@ -79,7 +79,7 @@
     "@cspell/eslint-plugin": "^10.0.0",
     "@eslint/js": "^10.0.1",
     "@iconify/tailwind4": "^1.2.3",
-    "@next/swc-darwin-x64": "16.2.5",
+    "@next/swc-darwin-x64": "16.2.6",
     "@tailwindcss/postcss": "^4.2.4",
     "@tauri-apps/cli": "2.11.1",
     "@types/node": "^25.6.0",
