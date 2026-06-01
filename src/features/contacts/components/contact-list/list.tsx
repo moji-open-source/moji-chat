@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { listContacts, type Contact } from '@/bindings'
-import { activeContactAtom } from '@/store/ui'
+import { activeContactAtom } from '@/features/contacts/store'
 
 import { ContactItem } from './item'
 

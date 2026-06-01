@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { listConversations, type Conversation } from '@/bindings'
 import { Listbox, ListboxContent } from '@/components/ui/listbox'
-import { activeConversationAtom } from '@/store/ui'
+import { activeConversationAtom } from '@/features/messages/store'
 
 import { ConversationGroup } from './group'
 import { ConversationListHeader } from './header'

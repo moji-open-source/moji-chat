@@ -2,8 +2,9 @@
 
 import { useCallback, useState } from 'react'
 
-import type { LoginFormValues } from '@/components/login/login.types'
 import { login } from '@/bindings'
+
+import type { LoginFormValues } from './types'
 
 interface UseLoginReturn {
   values: LoginFormValues

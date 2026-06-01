@@ -2,7 +2,7 @@ import { ChevronRight } from 'lucide-react'
 
 import { Switch } from '@/components/ui/switch'
 
-import { SettingsSection, SettingsRow } from './settings-primitives'
+import { SettingsSection, SettingsRow } from './primitives'
 import { ThemeSegment } from './theme-segment'
 
 export function SettingsView() {

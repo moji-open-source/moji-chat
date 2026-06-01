@@ -5,8 +5,8 @@ import { Group, Panel, Separator } from 'react-resizable-panels'
 
 import { getConversation, getMessages, type Conversation, type Message } from '@/bindings'
 
-import { ConversationHeader } from './conversation-header'
-import { MessageComposer } from './message-composer'
+import { ConversationHeader } from './header'
+import { MessageComposer } from './composer'
 import { MessageList } from './message-list'
 import type { ConversationViewProps } from './types'
 

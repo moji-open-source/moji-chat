@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { LoginScene } from '@/components/login'
+import { LoginScene } from '@/features/login'
 
 export const metadata: Metadata = {
   title: 'Login | Moji Chat',

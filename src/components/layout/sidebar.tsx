@@ -6,7 +6,7 @@ import type { LucideIcon } from 'lucide-react'
 import { MessageSquare, Users } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { OpenSettingsButton } from '@/features/settings/components/open-settings-button'
+import { OpenSettingsButton } from '@/features/settings'
 import { cn } from '@/lib/utils'
 
 interface Props {

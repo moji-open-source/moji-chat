@@ -3,7 +3,7 @@
 import { SubmitEvent } from 'react'
 
 import { Button, Checkbox, Input, Label } from '@/components/ui'
-import type { LoginFormValues } from './login.types'
+import type { LoginFormValues } from './types'
 
 interface LoginFormProps {
   values: LoginFormValues

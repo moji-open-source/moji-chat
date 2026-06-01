@@ -1,11 +1,12 @@
 'use client'
 
-import { useLogin } from '@/hooks/use-login'
-import { FooterCopyright } from '../footer-copyright'
-import { LoginForm } from './login-form'
-import { LoginHero } from './login-hero'
-import { LoginSecondaryActions } from './login-secondary-actions'
-import { LoginShell } from './login-shell'
+import { FooterCopyright } from '@/components/footer-copyright'
+
+import { LoginForm } from './form'
+import { LoginHero } from './hero'
+import { LoginSecondaryActions } from './secondary-actions'
+import { LoginShell } from './shell'
+import { useLogin } from './use-login'
 
 export function LoginScene() {
   const { values, isSubmitting, message, updateField, handleSubmit } = useLogin()

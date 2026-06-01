@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 
-import { ConversationAvatar } from './conversation-avatar'
+import { ConversationAvatar } from './avatar'
 import { MessageBubble } from './message-bubble'
 import type { MessageRowProps } from './types'
 

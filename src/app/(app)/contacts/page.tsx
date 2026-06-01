@@ -2,9 +2,7 @@
 
 import { useAtomValue } from 'jotai'
 
-import { activeContactAtom } from '@/store/ui'
-import { ContactProfile } from '@/features/contacts/components/contact-profile'
-import { ContactEmpty } from '@/features/contacts/components/contact-empty'
+import { activeContactAtom, ContactProfile, ContactEmpty } from '@/features/contacts'
 
 export default function ContactsPage() {
   const contactId = useAtomValue(activeContactAtom)

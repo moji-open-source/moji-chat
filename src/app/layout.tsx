@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Providers } from '@/lib'
-import { WinDisplayController } from '@/components/win-display-controller'
-import { NativeBehavior } from '@/components/native-behavior'
+import { Providers } from '@/lib/providers'
+import { WinDisplayController } from '@/platform/win-display-controller'
+import { NativeBehavior } from '@/platform/native-behavior'
 
 const inter = Inter({ subsets: ['latin'] })
 

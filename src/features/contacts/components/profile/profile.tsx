@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 
 import { getContact, type Contact } from '@/bindings'
 
-import { ContactProfileHeader } from './contact-profile-header'
-import { ContactProfileContent } from './contact-profile-content'
+import { ContactProfileHeader } from './header'
+import { ContactProfileContent } from './content'
 
 export function ContactProfile({ contactId }: { contactId: string }) {
   const [contact, setContact] = useState<Contact | null>(null)

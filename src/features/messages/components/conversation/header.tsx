@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button'
 import {
   CONVERSATION_HEADER_ACTIONS,
   type ConversationHeaderAction,
-} from './conversation-actions'
-import { ConversationAvatar } from './conversation-avatar'
+} from './header-actions'
+import { ConversationAvatar } from './avatar'
 import type { ConversationHeaderProps } from './types'
 
 export function ConversationHeader({ conversation }: ConversationHeaderProps) {

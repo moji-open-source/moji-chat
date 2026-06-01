@@ -1,4 +1,4 @@
-export { login, isDesktop } from './commands/auth'
+export { login } from './commands/auth'
 export { openSettingsWindow, canOpenNativeWindow } from './commands/window'
 export { listContacts, getContact } from './commands/contact'
 export { listConversations, getConversation, getMessages } from './commands/conversation'

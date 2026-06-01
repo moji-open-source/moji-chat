@@ -10,9 +10,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { SETTINGS_ROUTE } from '@/features/settings/constants'
 import { cn } from '@/lib/utils'
 import { canOpenNativeWindow, openSettingsWindow } from '@/bindings'
+
+import { SETTINGS_ROUTE } from './constants'
 
 interface OpenSettingsButtonProps {
   className?: string
