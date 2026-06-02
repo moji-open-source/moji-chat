@@ -43,10 +43,13 @@ async fn get_base_url() -> String {
 /// Configures mock responses for the login endpoint with test credentials.
 #[cfg(feature = "mock-server")]
 async fn setup_mock_server() -> String {
+    use fake::{Fake, Faker};
     use wiremock::matchers::{body_json, method, path};
     use wiremock::{Mock, MockServer, ResponseTemplate};
 
     let mock_server = MockServer::start().await;
+
+    let mock_response: LoginResponse = Faker.fake();
 
     Mock::given(method("POST"))
         .and(path(AUTH_LOGIN_PATH))
@@ -54,10 +57,7 @@ async fn setup_mock_server() -> String {
             "account": "hi@clovu.me",
             "password": "123456",
         })))
-        .respond_with(ResponseTemplate::new(200).set_body_json(LoginResponse {
-            user_id: "uid_9a7f2c8d3e".to_string(),
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyXzlhN2YyYzhkM2UiLCJleHAiOjE3Nzk5MjMyMDB9.bW9ja19zaWduYXR1cmVfZm9yX2ltX2RldmVsb3BtZW50X3Rva2Vu".to_string(),
-        }))
+        .respond_with(ResponseTemplate::new(200).set_body_json(mock_response))
         .mount(&mock_server)
         .await;
 
