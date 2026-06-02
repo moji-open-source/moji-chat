@@ -1,4 +1,6 @@
 use tauri_plugin_http::reqwest;
+#[cfg(feature = "mock-server")]
+use wiremock::MockServer;
 
 use crate::error::AppError;
 use crate::models::auth::{LoginParams, LoginResponse};
@@ -34,7 +36,7 @@ async fn get_base_url() -> String {
 
     #[cfg(feature = "mock-server")]
     {
-        setup_mock_server().await
+        setup_mock_server().await.uri()
     }
 }
 
@@ -42,7 +44,7 @@ async fn get_base_url() -> String {
 ///
 /// Configures mock responses for the login endpoint with test credentials.
 #[cfg(feature = "mock-server")]
-async fn setup_mock_server() -> String {
+async fn setup_mock_server() -> MockServer {
     use fake::{Fake, Faker};
     use wiremock::matchers::{body_json, method, path};
     use wiremock::{Mock, MockServer, ResponseTemplate};
@@ -61,7 +63,7 @@ async fn setup_mock_server() -> String {
         .mount(&mock_server)
         .await;
 
-    mock_server.uri()
+    mock_server
 }
 
 /// Authenticate against the remote API.
