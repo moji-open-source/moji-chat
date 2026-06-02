@@ -6,6 +6,9 @@ use crate::models::auth::{LoginParams, LoginResponse};
 /// API endpoint path for authentication.
 const AUTH_LOGIN_PATH: &str = "/api/auth/login";
 
+/// HTTP request timeout in seconds.
+const REQUEST_TIMEOUT_SECS: u64 = 30;
+
 #[cfg(not(feature = "mock-server"))]
 const API_BASE_URL: &str = "https://clovu.me";
 
@@ -13,7 +16,10 @@ const API_BASE_URL: &str = "https://clovu.me";
 ///
 /// Returns a configured reqwest client with appropriate settings.
 fn create_http_client() -> reqwest::Client {
-    reqwest::Client::new()
+    reqwest::Client::builder()
+        .timeout(std::time::Duration::from_secs(REQUEST_TIMEOUT_SECS))
+        .build()
+        .expect("failed to create HTTP client")
 }
 
 /// Get the base URL for API requests.
