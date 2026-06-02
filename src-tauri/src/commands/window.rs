@@ -6,6 +6,12 @@ const SETTINGS_LABEL: &str = "settings";
 const SETTINGS_URL: &str = "/settings";
 const SETTINGS_WIDTH: f64 = 650.0;
 const SETTINGS_HEIGHT: f64 = 680.0;
+const APP_LABEL: &str = "main";
+const APP_URL: &str = "/messages";
+const APP_MIN_WIDTH: f64 = 711.0;
+const APP_MIN_HEIGHT: f64 = 520.0;
+const APP_WIDTH: f64 = 934.0;
+const APP_HEIGHT: f64 = 683.0;
 
 /// Open (or focus) the settings window.
 #[tauri::command]
@@ -13,6 +19,15 @@ pub fn open_settings_window(app: AppHandle) -> Result<(), AppError> {
     match app.get_webview_window(SETTINGS_LABEL) {
         Some(win) => focus_window(&win),
         None => create_settings_window(&app),
+    }
+}
+
+/// Open (or focus) the main application window.
+#[tauri::command]
+pub fn open_app_window(app: AppHandle) -> Result<(), AppError> {
+    match app.get_webview_window(APP_LABEL) {
+        Some(win) => focus_window(&win),
+        None => create_app_window(&app),
     }
 }
 
@@ -39,6 +54,28 @@ fn create_settings_window(app: &AppHandle) -> Result<(), AppError> {
         .maximizable(false)
         .accept_first_mouse(true)
         .resizable(false)
+        .visible(false)
+        .build()
+        .map_err(|e| AppError::window(e.to_string()))?;
+
+    platform::apply_native_chrome(&webview_window);
+    platform::set_window_button_visible(&webview_window, platform::WindowButton::Zoom, false);
+
+    Ok(())
+}
+
+fn create_app_window(app: &AppHandle) -> Result<(), AppError> {
+    let builder = WebviewWindowBuilder::new(app, APP_LABEL, WebviewUrl::App(APP_URL.into()));
+
+    #[cfg(target_os = "macos")]
+    let builder = builder
+        .hidden_title(true)
+        .title_bar_style(tauri::TitleBarStyle::Overlay);
+
+    let webview_window = builder
+        .min_inner_size(APP_MIN_WIDTH, APP_MIN_HEIGHT)
+        .inner_size(APP_WIDTH, APP_HEIGHT)
+        .accept_first_mouse(true)
         .visible(false)
         .build()
         .map_err(|e| AppError::window(e.to_string()))?;

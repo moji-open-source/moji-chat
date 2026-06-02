@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
-import { login } from '@/bindings'
+import { login, openAppWindow } from '@/bindings'
 
 import type { LoginFormValues } from './types'
 
@@ -50,6 +50,7 @@ export function useLogin(): UseLoginReturn {
       })
       // TODO: persist token, switch to main window
       setMessage(`Login successful! Welcome, ${res.userId}`)
+      await openAppWindow()
     } catch (err) {
       setMessage(err instanceof Error ? err.message : String(err))
     } finally {

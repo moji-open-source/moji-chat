@@ -11,7 +11,7 @@
   "app": {
     "windows": [
       {
-        "label": "main",
+        "label": "LOGIN",
         "width": 450,
         "height": 670,
         "hiddenTitle": true,
@@ -19,18 +19,6 @@
         "acceptFirstMouse": true,
         "url": "/login",
         "resizable": false,
-        "visible": false
-      },
-      {
-        "label": "main1",
-        "minWidth": 711,
-        "minHeight": 520,
-        "width": 934,
-        "height": 683,
-        "hiddenTitle": true,
-        "titleBarStyle": "Overlay",
-        "acceptFirstMouse": true,
-        "url": "/messages",
         "visible": false
       }
     ],

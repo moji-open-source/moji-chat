@@ -9,3 +9,8 @@ export async function openSettingsWindow(): Promise<void> {
 export function canOpenNativeWindow(): boolean {
   return isTauri()
 }
+
+/// Open (or focus) the main application window (desktop only).
+export async function openAppWindow() {
+  return await invoke<void>('open_app_window')
+}
