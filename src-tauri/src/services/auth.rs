@@ -3,6 +3,9 @@ use tauri_plugin_http::reqwest;
 use crate::error::AppError;
 use crate::models::auth::{LoginParams, LoginResponse};
 
+/// API endpoint path for authentication.
+const AUTH_LOGIN_PATH: &str = "/api/auth/login";
+
 #[cfg(not(feature = "mock-server"))]
 const API_BASE_URL: &str = "https://clovu.me";
 
@@ -40,7 +43,7 @@ async fn setup_mock_server() -> String {
     let mock_server = MockServer::start().await;
 
     Mock::given(method("POST"))
-        .and(path("/api/auth/login"))
+        .and(path(AUTH_LOGIN_PATH))
         .and(body_json(serde_json::json!({
             "account": "hi@clovu.me",
             "password": "123456",
@@ -64,7 +67,7 @@ pub async fn login(params: &LoginParams) -> Result<LoginResponse, AppError> {
     let client = create_http_client();
 
     let res = client
-        .post(format!("{base_url}/api/auth/login"))
+        .post(format!("{base_url}{AUTH_LOGIN_PATH}"))
         .json(&serde_json::json!({
             "account": params.account,
             "password": params.password,
