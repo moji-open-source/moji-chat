@@ -17,6 +17,8 @@
     "core:menu:default",
     "core:tray:default",
     "shell:allow-open",
-    "core:app:allow-set-app-theme"
+    "core:app:allow-set-app-theme",
+    "core:window:allow-close",
+    "core:window:allow-hide"
   ]
 }
