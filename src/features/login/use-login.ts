@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react'
 
 import { login } from '@/bindings'
-import { switchToAppWindow } from '@/lib/window'
+import { switchToAppWindowWithCloseCurrent } from '@/lib/window'
 
 import type { LoginFormValues } from './types'
 
@@ -52,7 +52,7 @@ export function useLogin(): UseLoginReturn {
       // TODO: persist token
       setMessage(`Login successful! Welcome, ${res.userId}`)
 
-      await switchToAppWindow()
+      await switchToAppWindowWithCloseCurrent()
     } catch (err) {
       setMessage(err instanceof Error ? err.message : String(err))
     } finally {
