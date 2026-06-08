@@ -12,7 +12,7 @@ export function LoginShell({ children }: LoginShellProps) {
         <div className="absolute -right-24 -bottom-24 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl" />
       </div>
 
-      <section data-tauri-drag-region className="relative h-full w-full max-w-md rounded-[1.3rem] border border-white/10 bg-black/25 p-5 shadow-2xl shadow-black/30 backdrop-blur-xl">
+      <section data-tauri-drag-region className="relative h-full w-full max-w-md rounded-window-chrome-radius border border-white/10 bg-black/25 p-5 shadow-2xl shadow-black/30 backdrop-blur-xl">
         <div className="space-y-8" data-tauri-drag-region>
           <div className="-mb-2 h-5 w-full" data-tauri-drag-region />
           {children}
