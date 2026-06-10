@@ -68,7 +68,7 @@ export function LoginForm({
           </Label>
         </div>
 
-        <a href="#" className="text-[10px] font-semibold text-muted-foreground transition-colors hover:text-foreground hover:underline">
+        <a href="#" className="text-tiny font-semibold text-muted-foreground transition-colors hover:text-foreground hover:underline">
           Forgot?
         </a>
       </div>
