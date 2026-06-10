@@ -120,9 +120,6 @@ importers:
       '@iconify/tailwind4':
         specifier: ^1.2.3
         version: 1.2.3(tailwindcss@4.3.0)
-      '@next/swc-darwin-x64':
-        specifier: 16.2.7
-        version: 16.2.7
       '@tailwindcss/postcss':
         specifier: ^4.3.0
         version: 4.3.0
@@ -4335,7 +4332,8 @@ snapshots:
   '@next/swc-darwin-arm64@16.2.7':
     optional: true
 
-  '@next/swc-darwin-x64@16.2.7': {}
+  '@next/swc-darwin-x64@16.2.7':
+    optional: true
 
   '@next/swc-linux-arm64-gnu@16.2.7':
     optional: true
