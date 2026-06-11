@@ -16,7 +16,7 @@ const Tiptap = () => {
         autoCapitalize: 'off',
         autoComplete: 'off',
         autoCorrect: 'off',
-        class: 'min-h-full outline-none text-sm leading-relaxed',
+        class: 'h-full text-sm leading-relaxed',
       },
     },
     // Don't render immediately on the server to avoid SSR issues
