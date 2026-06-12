@@ -19,6 +19,7 @@
     "shell:allow-open",
     "core:app:allow-set-app-theme",
     "core:window:allow-close",
-    "core:window:allow-hide"
+    "core:window:allow-hide",
+    "core:window:allow-set-focus"
   ]
 }

@@ -15,7 +15,11 @@ const SHOW_TIMEOUT_MS = 500
 export function WinDisplayController() {
   useEffect(() => {
     waitForRenderReady()
-      .then(() => getCurrentWebviewWindow().show())
+      .then(async () => {
+        const cur = getCurrentWebviewWindow()
+        await cur.show()
+        await cur.setFocus()
+      })
   }, [])
 
   return null

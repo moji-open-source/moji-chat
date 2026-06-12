@@ -9,19 +9,6 @@
     "frontendDist": "../out"
   },
   "app": {
-    "windows": [
-      {
-        "label": "LOGIN",
-        "width": 450,
-        "height": 670,
-        "hiddenTitle": true,
-        "titleBarStyle": "Overlay",
-        "acceptFirstMouse": true,
-        "url": "/login",
-        "resizable": false,
-        "visible": false
-      }
-    ],
     "security": {
       "csp": null
     }

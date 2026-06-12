@@ -12,9 +12,9 @@ mod platform;
 mod services;
 mod state;
 
-use commands::{
+use crate::commands::{
     get_contact, get_conversation, get_messages, list_contacts, list_conversations, login,
-    open_app_window, open_settings_window,
+    open_app_window, open_login_window, open_settings_window,
 };
 use state::AppState;
 
@@ -37,6 +37,8 @@ pub async fn run() {
                 }
             }
 
+            let _ = open_login_window(app.handle().clone());
+
             Ok(())
         })
         .plugin(tauri_plugin_shell::init())
@@ -49,6 +51,7 @@ pub async fn run() {
             list_conversations,
             get_conversation,
             get_messages,
+            open_login_window
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

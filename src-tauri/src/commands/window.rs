@@ -31,6 +31,15 @@ pub fn open_app_window(app: AppHandle) -> Result<(), AppError> {
     }
 }
 
+/// Open (or focus) the login window
+#[tauri::command]
+pub fn open_login_window(app: AppHandle) -> Result<(), AppError> {
+    match app.get_webview_window("REGISTER") {
+        Some(win) => focus_window(&win),
+        None => create_login_window(&app),
+    }
+}
+
 /// Bring an existing window to the foreground.
 fn focus_window(win: &tauri::WebviewWindow) -> Result<(), AppError> {
     win.show().map_err(|e| AppError::window(e.to_string()))?;
@@ -83,5 +92,25 @@ fn create_app_window(app: &AppHandle) -> Result<(), AppError> {
     platform::apply_native_chrome(&webview_window);
     platform::set_window_button_visible(&webview_window, platform::WindowButton::Zoom, false);
 
+    Ok(())
+}
+
+fn create_login_window(app: &AppHandle) -> Result<(), AppError> {
+    let builder = WebviewWindowBuilder::new(app, "LOGIN", WebviewUrl::App("/login".into()));
+
+    #[cfg(target_os = "macos")]
+    let builder = builder
+        .hidden_title(true)
+        .title_bar_style(tauri::TitleBarStyle::Overlay);
+
+    let webview_window = builder
+        .inner_size(450.0, 670.0)
+        .visible(false)
+        .resizable(false)
+        .build()
+        .map_err(|e| AppError::window(e.to_string()))?;
+
+    platform::apply_native_chrome(&webview_window);
+    platform::set_window_button_visible(&webview_window, platform::WindowButton::Zoom, false);
     Ok(())
 }
