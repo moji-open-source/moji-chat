@@ -4,7 +4,7 @@ use std::fs;
 
 use tauri::Manager;
 
-mod commands;
+mod cmd;
 mod core;
 mod error;
 mod events;
@@ -14,13 +14,7 @@ mod services;
 mod state;
 mod window;
 
-use crate::{
-    commands::{
-        get_contact, get_conversation, get_messages, list_contacts, list_conversations, login,
-        open_app_window, open_login_window, open_settings_window,
-    },
-    window::WindowManager,
-};
+use crate::window::WindowManager;
 use state::AppState;
 
 #[tokio::main]
@@ -54,14 +48,14 @@ pub async fn run() {
 pub fn generate_handlers() -> impl Fn(tauri::ipc::Invoke<tauri::Wry>) -> bool + Send + Sync + 'static
 {
     tauri::generate_handler![
-        login,
-        open_settings_window,
-        open_app_window,
-        list_contacts,
-        get_contact,
-        list_conversations,
-        get_conversation,
-        get_messages,
-        open_login_window
+        cmd::login,
+        cmd::open_settings_window,
+        cmd::open_app_window,
+        cmd::list_contacts,
+        cmd::get_contact,
+        cmd::list_conversations,
+        cmd::get_conversation,
+        cmd::get_messages,
+        cmd::open_login_window
     ]
 }
