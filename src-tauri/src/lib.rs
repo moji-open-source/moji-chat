@@ -12,6 +12,7 @@ mod models;
 mod platform;
 mod services;
 mod state;
+mod utils;
 mod window;
 
 use crate::window::WindowManager;
@@ -23,6 +24,8 @@ pub async fn run() {
     let builder = tauri::Builder::default().manage(AppState::new());
     builder
         .setup(|app| {
+            core::handle::TauriAppHandle::global().init(app.handle().clone())?;
+
             let data_dir = app.path().app_data_dir()?;
             fs::create_dir_all(&data_dir)?;
 
