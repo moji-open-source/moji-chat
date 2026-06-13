@@ -39,3 +39,8 @@ next-env.d.ts
 
 # jetbrains
 .idea
+
+
+# Added by cargo
+
+/target

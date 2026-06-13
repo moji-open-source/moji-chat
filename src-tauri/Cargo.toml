@@ -5,17 +5,6 @@ edition = "2024"
 name = "moji-chat"
 version = "0.1.0"
 
-[profile.release]
-codegen-units = 1
-debug = 1
-incremental = false
-lto = true
-opt-level = "s"
-panic = "abort"
-strip = false
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [lib]
 crate-type = ["staticlib", "cdylib", "rlib"]
 name = "moji_chat_lib"
@@ -24,16 +13,16 @@ name = "moji_chat_lib"
 tauri-build = { version = "2.6.2", features = [] }
 
 [dependencies]
-fake = { version = "5.1.0", features = ["derive"] }
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-tauri = { version = "2.11.2", features = [] }
-tauri-plugin-http = { version = "2", features = ["unsafe-headers", "json"] }
-tauri-plugin-macos-fps = "0.1.0"
-tauri-plugin-shell = "2.3.5"
+fake = { workspace = true }
+serde = { workspace = true }
+serde_json = "1.0.150"
+tauri = { workspace = true }
+tauri-plugin-http = { workspace = true, features = ["unsafe-headers", "json"] }
+tauri-plugin-macos-fps = { workspace = true }
+tauri-plugin-shell = { workspace = true }
 thiserror = "2"
-tokio = { version = "1.52.3", features = ["tokio-macros", "macros"] }
-wiremock = { version = "0.6.5", optional = true }
+tokio = { workspace = true, features = ["tokio-macros", "macros"] }
+wiremock = { workspace = true, optional = true }
 
 [features]
 default = ["mock-server"]
