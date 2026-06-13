@@ -13,6 +13,8 @@ name = "moji_chat_lib"
 tauri-build = { version = "2.6.2", features = [] }
 
 [dependencies]
+moji-chat-logging.workspace = true
+
 fake.workspace = true
 serde.workspace = true
 serde_json = "1.0.150"
@@ -22,7 +24,11 @@ tauri-plugin-macos-fps.workspace = true
 tauri-plugin-shell.workspace = true
 thiserror = "2"
 tokio = { workspace = true, features = ["tokio-macros", "macros"] }
+tracing.workspace = true
+tracing-appender.workspace = true
+tracing-subscriber = { workspace = true, features = ["env-filter"] }
 wiremock = { workspace = true, optional = true }
+
 
 [features]
 default = ["mock-server"]

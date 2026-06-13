@@ -5,6 +5,7 @@ use std::fs;
 use tauri::Manager;
 
 mod commands;
+mod core;
 mod error;
 mod events;
 mod models;
@@ -26,11 +27,15 @@ use state::AppState;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub async fn run() {
     let builder = tauri::Builder::default().manage(AppState::new());
-
     builder
         .setup(|app| {
             let data_dir = app.path().app_data_dir()?;
             fs::create_dir_all(&data_dir)?;
+
+            let log_dir = app.path().app_log_dir()?;
+            fs::create_dir_all(&log_dir)?;
+
+            core::tracing::inti_tracing(log_dir);
 
             WindowManager::global()
                 .init(app.handle().clone())?

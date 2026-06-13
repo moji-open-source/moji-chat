@@ -44,6 +44,7 @@ impl WindowManager {
     }
 
     pub fn open_login_window(&self) -> Result<(), WindowError> {
+        tracing::info!("open login window");
         let app_handle = self.get_app_handle()?;
 
         match app_handle.get_webview_window("LOGIN") {
