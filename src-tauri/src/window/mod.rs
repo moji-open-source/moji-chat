@@ -1,9 +1,9 @@
-mod label;
+mod routes;
 
 use std::sync::OnceLock;
 use tauri::{AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
-use crate::{platform, window::label::Label};
+use crate::{platform, window::routes::Route};
 
 pub struct WindowManager {
     tauri_app: OnceLock<tauri::AppHandle>,
@@ -54,7 +54,7 @@ impl WindowManager {
 
     pub fn open_settings_window(&self) -> Result<(), WindowError> {
         let app_handle = self.get_app_handle()?;
-        match app_handle.get_webview_window(Label::Settings.as_ref()) {
+        match app_handle.get_webview_window(Route::Settings.as_ref()) {
             Some(win) => focus_window(&win),
             None => create_settings_window(app_handle),
         }
@@ -62,9 +62,9 @@ impl WindowManager {
 
     pub fn open_message_window(&self) -> Result<(), WindowError> {
         let app_handle = self.get_app_handle()?;
-        match app_handle.get_webview_window(Label::Messages.as_ref()) {
+        match app_handle.get_webview_window(Route::Messages.as_ref()) {
             Some(win) => focus_window(&win),
-            None => create_app_window(app_handle, Label::Messages),
+            None => create_app_window(app_handle, Route::Messages),
         }
     }
 }
@@ -76,7 +76,7 @@ fn focus_window(win: &tauri::WebviewWindow) -> Result<(), WindowError> {
     Ok(())
 }
 
-fn create_app_window(app: &AppHandle, flag: Label) -> Result<(), WindowError> {
+fn create_app_window(app: &AppHandle, flag: Route) -> Result<(), WindowError> {
     let builder = WebviewWindowBuilder::new(app, flag.clone(), WebviewUrl::App(flag.into()));
 
     #[cfg(target_os = "macos")]
@@ -99,7 +99,7 @@ fn create_app_window(app: &AppHandle, flag: Label) -> Result<(), WindowError> {
 
 fn create_login_window(app: &AppHandle) -> Result<(), WindowError> {
     let builder =
-        WebviewWindowBuilder::new(app, Label::Login, WebviewUrl::App(Label::Login.into()));
+        WebviewWindowBuilder::new(app, Route::Login, WebviewUrl::App(Route::Login.into()));
 
     #[cfg(target_os = "macos")]
     let builder = builder
@@ -121,8 +121,8 @@ fn create_login_window(app: &AppHandle) -> Result<(), WindowError> {
 fn create_settings_window(app: &AppHandle) -> Result<(), WindowError> {
     let builder = WebviewWindowBuilder::new(
         app,
-        Label::Settings,
-        WebviewUrl::App(Label::Settings.into()),
+        Route::Settings,
+        WebviewUrl::App(Route::Settings.into()),
     );
 
     #[cfg(target_os = "macos")]
