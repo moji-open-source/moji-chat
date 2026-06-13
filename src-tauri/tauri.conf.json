@@ -24,5 +24,9 @@
       "icons/icon.ico"
     ]
   },
-  "plugins": {}
+  "plugins": {
+    "macos-fps": {
+      "enabled": true
+    }
+  }
 }

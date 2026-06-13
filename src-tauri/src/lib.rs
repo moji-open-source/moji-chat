@@ -39,6 +39,7 @@ pub async fn run() {
 
             Ok(())
         })
+        .plugin(tauri_plugin_macos_fps::init())
         .plugin(tauri_plugin_shell::init())
         .invoke_handler(tauri::generate_handler![
             login,
