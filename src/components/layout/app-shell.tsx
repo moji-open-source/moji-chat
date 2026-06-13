@@ -1,9 +1,34 @@
 'use client'
 
+import React from 'react'
 import { usePathname } from 'next/navigation'
+
 import { Sidebar } from './sidebar'
+import { canOpenNativeWindow, openSettingsWindow } from '@/bindings'
+
+
+function useGlobalShortcutHandler() {
+  const isSettingsShortcut = (evt: KeyboardEvent) => evt.composed && evt.metaKey && evt.key === ','
+
+  const settingsShortcutHandler = (evt: KeyboardEvent) => {
+    evt.preventDefault()
+    if (canOpenNativeWindow())
+      openSettingsWindow()
+  }
+
+  return (evt: KeyboardEvent) => {
+    if (isSettingsShortcut(evt))
+      settingsShortcutHandler(evt)
+  }
+}
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+  const globalShortcutHandler = useGlobalShortcutHandler()
+
+  React.useEffect(() => {
+    window.addEventListener('keyup', globalShortcutHandler)
+  }, [])
 
   return (
     <main
