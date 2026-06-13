@@ -46,17 +46,22 @@ pub async fn run() {
         })
         .plugin(tauri_plugin_macos_fps::init())
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![
-            login,
-            open_settings_window,
-            open_app_window,
-            list_contacts,
-            get_contact,
-            list_conversations,
-            get_conversation,
-            get_messages,
-            open_login_window
-        ])
+        .invoke_handler(generate_handlers())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+pub fn generate_handlers() -> impl Fn(tauri::ipc::Invoke<tauri::Wry>) -> bool + Send + Sync + 'static
+{
+    tauri::generate_handler![
+        login,
+        open_settings_window,
+        open_app_window,
+        list_contacts,
+        get_contact,
+        list_conversations,
+        get_conversation,
+        get_messages,
+        open_login_window
+    ]
 }
