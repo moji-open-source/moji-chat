@@ -93,7 +93,6 @@ fn create_app_window(app: &AppHandle, flag: Route) -> Result<(), WindowError> {
         .build()?;
 
     platform::apply_native_chrome(&webview_window);
-    platform::set_window_button_visible(&webview_window, platform::WindowButton::Zoom, false);
 
     Ok(())
 }
