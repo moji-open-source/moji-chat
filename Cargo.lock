@@ -2061,6 +2061,7 @@ dependencies = [
 name = "moji-chat"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "fake",
  "moji-chat-logging",
  "objc2",

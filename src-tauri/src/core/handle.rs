@@ -1,3 +1,5 @@
+use std::ops::Deref;
+
 pub struct TauriAppHandle {
     inner: tokio::sync::OnceCell<tauri::AppHandle<tauri::Wry>>,
 }
@@ -22,5 +24,19 @@ impl TauriAppHandle {
             .set(handle)
             .map_err(|_| HandleError::AlreadyInitializedError)
             .map(|_| self)
+    }
+
+    pub fn get(&self) -> &tauri::AppHandle {
+        self.inner
+            .get()
+            .expect("TauriAppHandle accessed before initialization")
+    }
+}
+
+impl Deref for TauriAppHandle {
+    type Target = tauri::AppHandle<tauri::Wry>;
+
+    fn deref(&self) -> &Self::Target {
+        self.get()
     }
 }

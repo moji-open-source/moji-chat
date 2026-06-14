@@ -1,9 +1,5 @@
 #![allow(unexpected_cfgs)]
 
-use std::fs;
-
-use tauri::Manager;
-
 mod cmd;
 mod core;
 mod error;
@@ -26,19 +22,13 @@ pub async fn run() {
         .setup(|app| {
             core::handle::TauriAppHandle::global().init(app.handle().clone())?;
 
-            let data_dir = app.path().app_data_dir()?;
-            fs::create_dir_all(&data_dir)?;
-
-            let log_dir = app.path().app_log_dir()?;
-            fs::create_dir_all(&log_dir)?;
-
-            core::tracing::inti_tracing(log_dir);
+            utils::init::init_work_resource()?;
+            core::tracing::inti_tracing(utils::dirs::app_log_dir()?);
 
             WindowManager::global()
                 .init(app.handle().clone())?
                 .open_login_window()
-                .unwrap();
-
+                .expect("Failed to create login window");
             Ok(())
         })
         .plugin(tauri_plugin_macos_fps::init())
