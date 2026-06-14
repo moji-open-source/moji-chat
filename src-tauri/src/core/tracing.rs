@@ -2,6 +2,7 @@ use std::{path::Path, sync::OnceLock};
 
 use tracing::level_filters::LevelFilter;
 use tracing_appender::non_blocking::WorkerGuard;
+#[cfg(debug_assertions)]
 use tracing_subscriber::layer::SubscriberExt;
 
 static LOG_GUARD: OnceLock<WorkerGuard> = OnceLock::new();
