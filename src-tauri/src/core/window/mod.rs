@@ -3,7 +3,8 @@ mod routes;
 use std::sync::OnceLock;
 use tauri::{AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
-use crate::{platform, window::routes::Route};
+use crate::core::window::routes::Route;
+use crate::platform;
 
 pub struct WindowManager {
     tauri_app: OnceLock<tauri::AppHandle>,

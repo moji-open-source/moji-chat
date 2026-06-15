@@ -1,4 +1,5 @@
-use crate::{error::AppError, window::WindowManager};
+use crate::core::window::WindowManager;
+use crate::error::AppError;
 
 /// Open (or focus) the settings window.
 #[tauri::command]

@@ -9,9 +9,8 @@ mod platform;
 mod services;
 mod state;
 mod utils;
-mod window;
 
-use crate::window::WindowManager;
+use crate::core::window::WindowManager;
 use state::AppState;
 
 #[tokio::main]
