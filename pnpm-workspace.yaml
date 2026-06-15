@@ -2,3 +2,11 @@ allowBuilds:
   sharp: true
 minimumReleaseAgeExclude:
   - react-listbox-primitives@1.1.6
+  - '@vitest/expect@4.1.9'
+  - '@vitest/mocker@4.1.9'
+  - '@vitest/pretty-format@4.1.9'
+  - '@vitest/runner@4.1.9'
+  - '@vitest/snapshot@4.1.9'
+  - '@vitest/spy@4.1.9'
+  - '@vitest/utils@4.1.9'
+  - vitest@4.1.9
