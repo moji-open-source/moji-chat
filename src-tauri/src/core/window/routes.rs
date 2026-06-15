@@ -1,4 +1,4 @@
-use std::{fmt, path::PathBuf};
+use std::path::PathBuf;
 
 #[derive(Clone)]
 pub enum Route {
@@ -7,14 +7,16 @@ pub enum Route {
     Messages,
 }
 
-impl From<Route> for String {
-    fn from(val: Route) -> Self {
-        val.to_string()
+impl Route {
+    pub fn path(&self) -> &'static str {
+        match self {
+            Route::Login => "/login",
+            Route::Settings => "/settings",
+            Route::Messages => "/messages",
+        }
     }
-}
 
-impl AsRef<str> for Route {
-    fn as_ref(&self) -> &str {
+    pub fn label(&self) -> &'static str {
         match self {
             Route::Login => "LOGIN",
             Route::Settings => "SETTINGS",
@@ -23,18 +25,8 @@ impl AsRef<str> for Route {
     }
 }
 
-impl fmt::Display for Route {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.as_ref())
-    }
-}
-
 impl From<Route> for PathBuf {
     fn from(val: Route) -> Self {
-        match val {
-            Route::Login => "/login".into(),
-            Route::Settings => "/settings".into(),
-            Route::Messages => "/messages".into(),
-        }
+        val.path().into()
     }
 }
