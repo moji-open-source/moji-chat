@@ -48,7 +48,7 @@ impl WindowManager {
         tracing::info!("open login window");
         let app_handle = self.get_app_handle()?;
 
-        match app_handle.get_webview_window("LOGIN") {
+        match app_handle.get_webview_window(Route::Login.as_ref()) {
             Some(win) => focus_window(&win),
             None => create_login_window(app_handle),
         }
