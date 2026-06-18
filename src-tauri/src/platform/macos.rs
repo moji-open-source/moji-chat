@@ -51,6 +51,8 @@ pub fn attach_toolbar<R: tauri::Runtime>(window: &WebviewWindow<R>) {
         ns_window.setToolbar(Some(&toolbar));
     }
 
+    // different types of toolbar windows have different rounded corners on macOS 26 :(
+    // see: https://developer.apple.com/videos/play/wwdc2025/310/
     ns_window.setToolbarStyle(NSWindowToolbarStyle::Automatic);
 
     set_css_var(window, "--window-chrome-radius", "10.5pt").unwrap_or_else(|err| {
