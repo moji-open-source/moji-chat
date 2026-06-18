@@ -56,7 +56,7 @@ pub fn attach_toolbar<R: tauri::Runtime>(window: &WebviewWindow<R>) {
     ns_window.setToolbarStyle(NSWindowToolbarStyle::Automatic);
 
     set_css_var(window, "--window-chrome-radius", "10.5pt").unwrap_or_else(|err| {
-        println!("Failed to set window rounded corners: {err}");
+        tracing::error!("failed to set window rounded corners: {err}");
     });
 }
 
