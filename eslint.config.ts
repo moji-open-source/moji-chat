@@ -1,10 +1,11 @@
 import globals from 'globals'
 import pluginJs from '@eslint/js'
+import { defineConfig } from 'eslint/config'
 import tseslint from 'typescript-eslint'
 import react from 'eslint-plugin-react'
 import reactCompiler from 'eslint-plugin-react-compiler'
 
-export default [
+export default defineConfig([
   {
     languageOptions: {
       globals: {
@@ -29,7 +30,7 @@ export default [
   },
 
   {
-    ignores: ['.next/', 'next-env.d.ts', 'src-tauri/', 'out', '.agents/'],
+    ignores: ['.next/', 'next-env.d.ts', 'src-tauri/', 'target/', 'out', '.agents/'],
   },
 
   {
@@ -65,4 +66,5 @@ export default [
       ],
     },
   },
-]
+],
+)
