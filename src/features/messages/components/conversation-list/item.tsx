@@ -1,5 +1,5 @@
 import type { Conversation } from '@/bindings'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { ListboxItem } from '@/components/ui/listbox'
 import { cn } from '@/lib/utils'
 
@@ -8,16 +8,16 @@ interface ConversationItemProps {
   active: boolean
 }
 
+const btnClass = buttonVariants({ variant: 'ghost', size: 'default' })
+
 export function ConversationItem({ conversation, active }: ConversationItemProps) {
   return (
     <ListboxItem asChild value={conversation.id}>
-      <Button
-        variant="ghost"
-        className={cn(
-          'h-auto flex items-center gap-3 rounded-xl px-3 py-2.5 text-left relative hover:bg-white/5 border border-transparent data-[state=checked]:bg-[rgba(124,58,237,0.18)] data-[state=checked]:border-[rgba(139,92,246,0.28)] [&[data-state=checked]_.name-span]:text-[rgba(167,139,250,0.9)]',
-          active && 'bg-accent text-accent-foreground',
-        )}
-      >
+      <div className={cn(
+        btnClass,
+        'h-auto flex items-center gap-3 rounded-xl px-3 py-2.5 text-left relative hover:bg-white/5 border border-transparent data-[state=checked]:bg-[rgba(124,58,237,0.18)] data-[state=checked]:border-[rgba(139,92,246,0.28)] [&[data-state=checked]_.name-span]:text-[rgba(167,139,250,0.9)]',
+        active && 'bg-accent text-accent-foreground',
+      )}>
         <div className="relative">
           <div className="size-7.75 text-sm rounded-full bg-linear-to-br from-indigo-500 to-blue-600 flex items-center justify-center font-semibold text-white shrink-0">
             {conversation.name.slice(0, 1)}
@@ -44,7 +44,7 @@ export function ConversationItem({ conversation, active }: ConversationItemProps
             {conversation.unread}
           </div>
         )}
-      </Button>
+      </div>
     </ListboxItem>
   )
 }
